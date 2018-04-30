@@ -43,11 +43,12 @@ class BlogTag extends BlogModel
             $name = ucwords(strtolower(trim($tag)));
             $tag = self::where("name", $name)->first();
 
-//            $siteId = strpos(request()->url(), '/admin') !== false
-//                ? session(Controller::SESSION_SITE_ID)
-//                : null;
-//            $siteId = CurrentSite::getCurrentSite($siteId)->id;
             $siteId = null;
+            $siteClass = config("laravel-blog.site_model");
+            if ($siteClass) {
+                $siteClassInstance = new $siteClass();
+                $siteId = $siteClassInstance::getSiteId();
+            }
 
             // If the tag doesn't exist, create it
             if(!$tag) {
