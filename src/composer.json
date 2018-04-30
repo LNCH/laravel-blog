@@ -8,5 +8,6 @@
         }
     ],
     "licence": "MIT",
+    "minimum-stability": "dev",
     "require": {}
 }
