@@ -41,9 +41,6 @@ class LaravelBlogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Allow routing to work
-        include __DIR__.'/routes/web.php';
-
         // Set up the config if not published
         if ($this->app['config']->get('laravel-blog') === null) {
             $this->app['config']->set('laravel-blog', require __DIR__.'/../config/laravel-blog.php');
@@ -54,6 +51,9 @@ class LaravelBlogServiceProvider extends ServiceProvider
             __DIR__.'/../config/laravel-blog.php',
             'permission'
         );
+
+        // Allow routing to work
+        include __DIR__.'/routes/web.php';
     }
 
     public function registerPolicies()
