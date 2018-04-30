@@ -1,3 +1,10 @@
 <?php
 
-Route::get("super-test-route-times", "Lnch\LaravelBlog\Controllers\BlogTagController@index");
+Route::group(['prefix' => 'blog', 'middleware' => 'web'], function() {
+
+    Route::resource("tags", "Lnch\LaravelBlog\Controllers\BlogTagController", ['except' => [
+        'create', 'show'
+    ]]);
+
+});
+
