@@ -1,0 +1,12 @@
+{
+    "name": "lnch/laravel-blog",
+    "description": "A complete Blog module, with category, tag, images and comments support",
+    "authors": [
+        {
+            "name": "Tom Lynch",
+            "email": "tom@lnch.co.uk"
+        }
+    ],
+    "licence": "MIT",
+    "require": {}
+}
