@@ -15,5 +15,11 @@ Route::group(['prefix' => config("laravel-blog.route_prefix"), 'middleware' => '
         ]]);
     }
 
+    if (config("laravel-blog.images.enabled")) {
+        Route::resource(config("laravel-blog.images.taxonomy"), "Lnch\LaravelBlog\Controllers\BlogImageController", ['except' => [
+            'show'
+        ]]);
+    }
+
 });
 

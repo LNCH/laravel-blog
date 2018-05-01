@@ -5,6 +5,7 @@ namespace Lnch\LaravelBlog;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Lnch\LaravelBlog\Models\BlogCategory;
+use Lnch\LaravelBlog\Models\BlogImage;
 use Lnch\LaravelBlog\Models\BlogTag;
 use Lnch\LaravelBlog\Policies\BlogCategoryPolicy;
 use Lnch\LaravelBlog\Policies\BlogTagPolicy;
@@ -14,6 +15,7 @@ class LaravelBlogServiceProvider extends ServiceProvider
     protected $policies = [
         BlogTag::class              => BlogTagPolicy::class,
         BlogCategory::class         => BlogCategoryPolicy::class,
+        BlogImage::class            => BlogImagePolicy::class,
     ];
 
     /**

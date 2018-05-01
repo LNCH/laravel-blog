@@ -94,6 +94,21 @@ return [
         'enabled'           => true,
         'taxonomy'          => 'tags',
         'per_page'          => 15,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Image Options
+    |--------------------------------------------------------------------------
+    |
+    | All config options related to the blog images are found in this section.
+    |
+    */
+
+    'images' => [
+        'enabled'           => true,
+        'taxonomy'          => 'images',
+        'per_page'          => 15,
     ]
 
 ];

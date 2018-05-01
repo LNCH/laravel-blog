@@ -2,10 +2,9 @@
 
 namespace Lnch\LaravelBlog\Models;
 
-use App\Models\SiteModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BlogImage extends SiteModel
+class BlogImage extends BlogModel
 {
     use SoftDeletes;
 
