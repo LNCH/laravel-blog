@@ -76,10 +76,9 @@ return [
     */
 
     'categories' => [
-
         'enabled'           => true,
+        'taxonomy'          => 'categories',
         'per_page'          => 10,
-
     ],
 
     /*
@@ -92,10 +91,9 @@ return [
     */
 
     'tags' => [
-
         'enabled'           => true,
+        'taxonomy'          => 'tags',
         'per_page'          => 15,
-
     ]
 
 ];
