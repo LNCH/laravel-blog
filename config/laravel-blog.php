@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'site_model' => Lnch\LaravelBlog\Site::class,
+    'site_model' => Lnch\LaravelBlog\Models\Site::class,
 
     'site_primary_key' => 'id',
 
