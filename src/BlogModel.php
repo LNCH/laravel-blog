@@ -11,19 +11,10 @@ class BlogModel extends Model
     {
         parent::boot();
 
-        // Get site Model
-        $siteClass = config("laravel-blog.site_model");
-
-        if ($siteClass) {
-            $siteClassInstance = new $siteClass();
-
-            // Get site ID
-            $siteId = $siteClassInstance::getSiteId();
-
-            static::addGlobalScope('site', function(Builder $builder) use($siteId) {
-                $builder->where('site_id', $siteId);
-            });
-        }
+        // Add Site query scope to the models
+        static::addGlobalScope('site', function(Builder $builder) {
+            $builder->where('site_id', getBlogSiteID());
+        });
     }
 
     public function site()
