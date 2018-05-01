@@ -8,8 +8,6 @@ class BlogImage extends BlogModel
 {
     use SoftDeletes;
 
-    const STORAGE_PATH = "app/public/images/blog";
-
     protected $fillable = [
         'site_id',
         'path',
@@ -26,7 +24,7 @@ class BlogImage extends BlogModel
      */
     public function getPath()
     {
-        return storage_path(self::STORAGE_PATH . '/' . $this->path);
+        return public_path(config("laravel-blog.images.storage_path") . '/' . $this->path);
     }
 
     /**
@@ -36,6 +34,6 @@ class BlogImage extends BlogModel
      */
     public function getUrl()
     {
-        return url("/image/original/blog/" . $this->path);
+        return url(config("laravel-blog.images.storage_path") . "/" . $this->path);
     }
 }
