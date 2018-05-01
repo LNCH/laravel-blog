@@ -1,5 +1,10 @@
 - How to install
 - Basic configuration
+- Explain helper functions
+- Demonstrate facade
+- Explain caching
+- Demonstrate Artisan commands
+- List events (future)
 - How to use the Site functionality
 - How to override the policies (interface)
 - How to override the controllers
