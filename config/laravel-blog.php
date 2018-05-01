@@ -44,6 +44,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Layout Options
+    |--------------------------------------------------------------------------
+    |
+    | By default Laravel Blog uses a very simple built in layout, that provides
+    | simple links to the related blog pages. If you wish to use your own layout,
+    | set the layout view below. view_layout will be used in the @extends()
+    | directive.
+    |
+    | By default, the view content will be injected into a section named 'content'.
+    | To change this, set the @section() you'd like to use instead in the view_content
+    | option below.
+    |
+    | If you wish to use the default options, either leave these values untouched,
+    | or comment them out entirely
+    |
+    */
+
+    'view_layout' => "laravel-blog::layout",
+
+    'view_content' => 'content',
+
+    /*
+    |--------------------------------------------------------------------------
     | Tag Options
     |--------------------------------------------------------------------------
     |

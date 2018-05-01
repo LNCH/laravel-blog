@@ -1,6 +1,6 @@
-@extends("laravel-blog::layout")
+@extends(config("laravel-blog.view_layout", "laravel-blog::layout"))
 
-@section("content")
+@section(config("laravel-blog.view_content", "content"))
 
     <div class="row">
 
