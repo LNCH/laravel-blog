@@ -13,7 +13,10 @@
     "autoload": {
         "psr-4": {
             "Lnch\\LaravelBlog\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
