@@ -54,7 +54,7 @@ class BlogImageController extends Controller
     /**
      * Handles upload of images and stores them in the database
      *
-     * @param Request $request
+     * @param BlogImageRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BlogImageRequest $request)
@@ -88,11 +88,10 @@ class BlogImageController extends Controller
     /**
      * Displays a form for editing the selected BlogImage.
      *
-     * @param Request   $request
      * @param BlogImage $image
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Request $request, BlogImage $image)
+    public function edit(BlogImage $image)
     {
         if(auth()->user()->cannot("edit", $image)) {
             abort(403);
@@ -103,6 +102,13 @@ class BlogImageController extends Controller
         ]);
     }
 
+    /**
+     * Updates the given resource
+     *
+     * @param BlogImageRequest $request
+     * @param BlogImage        $image
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(BlogImageRequest $request, BlogImage $image)
     {
         if(auth()->user()->cannot("edit", $image)) {
@@ -122,11 +128,11 @@ class BlogImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param BlogCategory $category
+     * @param BlogImage $image
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function destroy(Request $request, BlogImage $image)
+    public function destroy(BlogImage $image)
     {
         if(auth()->user()->cannot("delete", $image)) {
             abort(403);
@@ -143,10 +149,10 @@ class BlogImageController extends Controller
      * Uploads a file to the server and creates a DB entry.
      *
      * @param UploadedFile $file
-     * @param Request      $request
+     * @param BlogImageRequest      $request
      * @return string
      */
-    private function uploadFile(UploadedFile $file, Request $request)
+    private function uploadFile(UploadedFile $file, BlogImageRequest $request)
     {
         // Create filename
         $name = $file->getClientOriginalName();
