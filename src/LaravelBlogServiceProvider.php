@@ -4,6 +4,8 @@ namespace Lnch\LaravelBlog;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Lnch\LaravelBlog\Models\BlogCategory;
+use Lnch\LaravelBlog\Models\BlogTag;
 use Lnch\LaravelBlog\Policies\BlogCategoryPolicy;
 use Lnch\LaravelBlog\Policies\BlogTagPolicy;
 

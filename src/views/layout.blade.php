@@ -54,5 +54,7 @@
             @yield("content")
         </div>
 
+        <script src="{{ asset("vendor/lnch/laravel-blog/blog.js") }}"></script>
+
     </body>
 </html>

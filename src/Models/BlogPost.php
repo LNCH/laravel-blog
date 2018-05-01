@@ -1,6 +1,6 @@
 <?php
 
-namespace Lnch\LaravelBlog;
+namespace Lnch\LaravelBlog\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
