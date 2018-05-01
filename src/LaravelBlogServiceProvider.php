@@ -8,6 +8,7 @@ use Lnch\LaravelBlog\Models\BlogCategory;
 use Lnch\LaravelBlog\Models\BlogImage;
 use Lnch\LaravelBlog\Models\BlogTag;
 use Lnch\LaravelBlog\Policies\BlogCategoryPolicy;
+use Lnch\LaravelBlog\Policies\BlogImagePolicy;
 use Lnch\LaravelBlog\Policies\BlogTagPolicy;
 
 class LaravelBlogServiceProvider extends ServiceProvider
