@@ -106,9 +106,27 @@ return [
     */
 
     'images' => [
+
+        /*
+         * Defines whether or not the feature is enabled on the site or not
+         */
         'enabled'           => true,
+
+        /*
+         * The taxonomy will be used in the routes file to define the route
+         */
         'taxonomy'          => 'images',
+
+        /*
+         * How many images should be shown on the index page
+         */
         'per_page'          => 15,
+
+        /*
+         * Where Blog Images will be stored. Relative to the public directory
+         */
+        'storage_path'      => "images/laravel-blog",
+
     ]
 
 ];
