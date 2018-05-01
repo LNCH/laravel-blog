@@ -1,0 +1,102 @@
+.drag-upload {
+
+}
+
+.drag-upload label span.drag {
+    display: none;
+}
+
+.drag-upload.has-drag label {
+    display: block;
+    background: whitesmoke;
+    padding: 5rem 3rem;
+    border: 2px dashed #d8d8d8;
+    text-align: center;
+    cursor: pointer;
+}
+
+.drag-upload.has-drag label span.no-drag {
+    display: none;
+}
+
+.drag-upload.has-drag label span.drag {
+    display: inline-block;
+    font-size: 1.2em;
+    color: grey;
+}
+
+.drag-upload.has-drag input[type="file"] {
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    width: 0.1px;
+    height: 0.1px;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+
+.pending-images .pending {
+    border: 1px solid #D4D4D4;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.pending-images .pending::before,
+.pending-images .pending::after {
+    display: table;
+    content: '';
+}
+
+.pending-images .pending::after {
+    clear: both;
+}
+
+.pending-images .pending-image {
+    width: 33%;
+    float: left;
+}
+
+.pending-images .pending-image img {
+    width: 100%;
+}
+
+.pending-images .form {
+    width: 66%;
+    float: left;
+    padding: 1rem;
+}
+
+.images-flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem -1% 0;
+}
+
+.images-flex .image {
+    position: relative;
+    flex: 1 1 18%;
+    margin: 0 1% 1.5rem 1%;
+    border: 1px solid #d2d2d2;
+    background: #f3f3f3;
+    text-align: center;
+}
+
+.images-flex .image img {
+    width: auto;
+    max-width: 100%;
+    max-height: 150px;
+}
+
+.images-flex .image .actions {
+    padding: 1rem;
+    border-top: 1px solid #d2d2d2;
+    background: white;
+}
+
+.btn-xs + .dropdown-menu li input {
+    position: absolute;
+    left: -9999px;
+}
