@@ -2,8 +2,6 @@
 
 namespace Lnch\LaravelBlog;
 
-use App\Helpers\CurrentSite;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogTag extends BlogModel
