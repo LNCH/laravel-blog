@@ -8,6 +8,26 @@
 
     <body>
 
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <p class="navbar-brand" style="margin: 0;">Laravel Blog</p>
+
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ blogUrl("posts") }}">Posts</a></li>
+                            <li><a href="{{ blogUrl("comments") }}">Comments</a></li>
+                            <li><a href="{{ blogUrl("categories") }}">Categories</a></li>
+                            <li><a href="{{ blogUrl("tags") }}">Tags</a></li>
+                            <li><a href="{{ blogUrl("images") }}">Images</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+
         @if (isset($errors) && $errors->count() > 0)
             <div class="alert alert-danger">
                 <ul>
