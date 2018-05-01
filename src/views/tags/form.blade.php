@@ -1,6 +1,6 @@
 <h4>{{ isset($tag) ? "Edit" : "New" }} Tag{{ isset($tag) ? "" : "s" }}</h4>
 
-<form action="{{ isset($tag) ? url("blog/tags/$tag->id") : url("blog/tags") }}" method="post">
+<form action="{{ isset($tag) ? blogUrl("tags/$tag->id") : blogUrl("tags") }}" method="post">
     {{ csrf_field() }} {{ method_field(isset($tag) ? "PATCH" : "POST") }}
 
     @if(!isset($tag))

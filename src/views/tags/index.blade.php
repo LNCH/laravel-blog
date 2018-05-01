@@ -35,11 +35,11 @@
                             <td>{{ count($tag->posts) }}</td>
                             <td>
                                 @can("edit", $tag)
-                                    <a href="{{ url("blog/tags/$tag->id/edit") }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{ blogUrl("tags/$tag->id/edit") }}" class="btn btn-sm btn-primary">Edit</a>
                                 @endcan
 
                                 @can("delete", $tag)
-                                    <form action="{{ url("blog/tags/$tag->id") }}" method="post" class="form-inline confirm-delete">
+                                    <form action="{{ blogUrl("tags/$tag->id") }}" method="post" class="form-inline confirm-delete">
                                         {{ csrf_field() }} {{ method_field("DELETE") }}
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </form>
