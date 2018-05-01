@@ -2,14 +2,17 @@
 
 namespace Lnch\LaravelBlog;
 
-use App\Models\SiteModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BlogCategory extends SiteModel
+class BlogCategory extends BlogModel
 {
     use SoftDeletes;
 
-    protected $fillable = ['site_id', 'name', 'description'];
+    protected $fillable = [
+        'site_id',
+        'name',
+        'description'
+    ];
 
     /**
      * Related post records
