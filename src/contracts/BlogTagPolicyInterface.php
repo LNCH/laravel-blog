@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Contracts;
 
-use Lnch\LaravelBlog\BlogTag;
+use Lnch\LaravelBlog\Models\BlogTag;
 
 interface BlogTagPolicyInterface
 {

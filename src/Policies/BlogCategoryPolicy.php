@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Policies;
 
-use Lnch\LaravelBlog\BlogCategory;
+use Lnch\LaravelBlog\Models\BlogCategory;
 use Lnch\LaravelBlog\Contracts\BlogCategoryPolicyInterface;
 
 class BlogCategoryPolicy extends BasePolicy implements BlogCategoryPolicyInterface

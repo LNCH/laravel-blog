@@ -1,6 +1,6 @@
 <?php
 
-namespace Lnch\LaravelBlog;
+namespace Lnch\LaravelBlog\Models;
 
 use Lnch\LaravelBlog\Contracts\SiteInterface;
 

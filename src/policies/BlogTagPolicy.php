@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Policies;
 
-use Lnch\LaravelBlog\BlogTag;
+use Lnch\LaravelBlog\Models\BlogTag;
 use Lnch\LaravelBlog\Contracts\BlogTagPolicyInterface;
 
 class BlogTagPolicy extends BasePolicy implements BlogTagPolicyInterface

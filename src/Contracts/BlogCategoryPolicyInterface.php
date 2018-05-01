@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Contracts;
 
-use Lnch\LaravelBlog\BlogCategory;
+use Lnch\LaravelBlog\Models\BlogCategory;
 
 interface BlogCategoryPolicyInterface
 {

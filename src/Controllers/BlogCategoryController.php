@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Controllers;
 
-use Lnch\LaravelBlog\BlogCategory;
+use Lnch\LaravelBlog\Models\BlogCategory;
 use Lnch\LaravelBlog\Requests\BlogCategoryRequest;
 
 class BlogCategoryController extends Controller

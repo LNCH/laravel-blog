@@ -2,7 +2,7 @@
 
 namespace Lnch\LaravelBlog\Controllers;
 
-use Lnch\LaravelBlog\BlogTag;
+use Lnch\LaravelBlog\Models\BlogTag;
 use Lnch\LaravelBlog\Requests\BlogTagRequest;
 
 class BlogTagController extends Controller
