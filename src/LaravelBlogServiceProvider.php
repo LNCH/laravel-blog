@@ -32,6 +32,10 @@ class LaravelBlogServiceProvider extends ServiceProvider
             __DIR__.'/../config/laravel-blog.php' => config_path('laravel-blog.php'),
         ], 'laravel-blog/config');
 
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/lnch/laravel-blog'),
+        ], 'laravel-blog/public');
+
         // Register policies
         $this->registerPolicies();
     }
