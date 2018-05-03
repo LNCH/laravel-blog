@@ -70,8 +70,7 @@ return [
     | Catgeory Options
     |--------------------------------------------------------------------------
     |
-    | All config options related to the blog categories are found in this
-    | section.
+    | All config options related to the blog categories.
     |
     */
 
@@ -99,7 +98,7 @@ return [
     | Tag Options
     |--------------------------------------------------------------------------
     |
-    | All config options related to the blog tags are found in this section.
+    | All config options related to the blog tags.
     |
     */
 
@@ -127,7 +126,7 @@ return [
     | Image Options
     |--------------------------------------------------------------------------
     |
-    | All config options related to the blog images are found in this section.
+    | All config options related to the blog images.
     |
     */
 
