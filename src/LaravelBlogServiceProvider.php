@@ -67,6 +67,10 @@ class LaravelBlogServiceProvider extends ServiceProvider
             'permission'
         );
 
+        $this->app->bind('laravel-blog', function() {
+            return new Models\BlogHelper;
+        });
+
         // Allow routing to work
         include __DIR__.'/routes/web.php';
     }

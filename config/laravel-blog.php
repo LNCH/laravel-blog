@@ -92,6 +92,11 @@ return [
         'ckeditor' => [
 
             /*
+             * Path to the CKEditor JS file. CDN is used by default
+             */
+            'path'              => 'https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js',
+
+            /*
              * Location of a custom config file for CKEditor. Relative to public path
              */
             'custom_config'     => '/vendor/lnch/laravel-blog/js/ckeditor_config.js',
