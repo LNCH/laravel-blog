@@ -67,7 +67,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Catgeory Options
+    | Post Options
+    |--------------------------------------------------------------------------
+    |
+    | All config options related to the blog posts.
+    |
+    */
+
+    'posts' => [
+
+        /*
+           * The taxonomy will be used in the routes file to define the route
+           */
+        'taxonomy'          => 'posts',
+
+        /*
+         * How many records should be shown on the index page
+         */
+        'per_page'          => 10,
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Category Options
     |--------------------------------------------------------------------------
     |
     | All config options related to the blog categories.

@@ -1,0 +1,231 @@
+<?php
+
+namespace Lnch\LaravelBlog\Controllers;
+
+use Lnch\LaravelBlog\Models\BlogPost;
+
+class BlogPostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        if(auth()->user()->cannot("view", BlogPost::class)) {
+            abort(403);
+        }
+
+        $posts = BlogPost::orderBy("is_featured", "desc")
+            ->whereRaw("TIMESTAMP(published_at) < NOW()")
+            ->orderBy("published_at", "desc")
+            ->paginate(config("laravel-blog.posts.per_page"));
+
+        return view("laravel-blog::".$this->viewPath."posts.index", [
+            'posts' => $posts
+        ]);
+    }
+
+    /**
+     * Display a listing of all posts scheduled for the future.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function scheduled()
+    {
+        if(auth()->user()->cannot("view", BlogPost::class)) {
+            abort(403);
+        }
+
+        $this->breadcrumbs[] = new Breadcrumb('Blog', true);
+
+        $posts = BlogPost::whereRaw("TIMESTAMP(published_at) > NOW()")
+            ->orderBy("published_at", "asc")
+            ->paginate(15);
+
+        return $this->view("admin.blog.index", ['posts' => $posts]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        if(auth()->user()->cannot("create", BlogPost::class)) {
+            abort(403);
+        }
+
+        $this->breadcrumbs[] = new Breadcrumb('Blog', false, url("admin/blog"));
+        $this->breadcrumbs[] = new Breadcrumb('New Post', true);
+
+        return $this->view("admin.blog.editor");
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param BlogPostRequest|Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(BlogPostRequest $request)
+    {
+        if(auth()->user()->cannot("create", BlogPost::class)) {
+            abort(403);
+        }
+
+        $siteId = CurrentSite::getCurrentSite()->id;
+
+        $published_at = $request->published_at
+            ? date("Y-m-d H:i:s", strtotime($request->published_at))
+            : date("Y-m-d H:i:s", time() - 60);
+
+        $slug = $request->slug
+            ? BlogPost::processSlug($request->slug)
+            : BlogPost::processSlug($request->title);
+
+        // Create post
+        $post = BlogPost::create([
+            'site_id' => $siteId,
+            'author_id' => auth()->user()->id,
+            'blog_image_id' => $request->blog_image_id,
+            'title' => $request->title,
+            'slug' =>  $slug,
+            'content' => $request->content,
+            'status' => $request->status,
+            'format' => BlogPost::FORMAT_STANDARD,
+            'is_approved' => 1,
+            'comments_enabled' => boolval($request->comments_enabled),
+            'published_at' => $published_at,
+            'is_featured' => boolval($request->get("is_featured", 0))
+        ]);
+
+        // Update category
+        if($request->category) {
+            $post->categories()->sync($request->category);
+        }
+
+        // Assign tags
+        if($request->tags) {
+            $tags = explode(",", $request->tags);
+            $post->syncTags($tags);
+        }
+
+        // Return
+        return redirect("admin/blog")
+            ->with("success", "Blog post created successfully");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param BlogPost $post
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function show(BlogPost $post)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param BlogPost $post
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function edit(BlogPost $post)
+    {
+        if(auth()->user()->cannot("edit", $post)) {
+            abort(403);
+        }
+
+        $this->breadcrumbs[] = new Breadcrumb('Blog', false, url("admin/blog"));
+        $this->breadcrumbs[] = new Breadcrumb('Edit Post', true);
+
+        return $this->view("admin.blog.editor", [
+            'post' => $post
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param BlogPost                  $post
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function update(BlogPostRequest $request, BlogPost $post)
+    {
+        if(auth()->user()->cannot("edit", $post)) {
+            abort(403);
+        }
+
+        $siteId = CurrentSite::getCurrentSite()->id;
+
+        $published_at = $request->published_at
+            ? date("Y-m-d H:i:s", strtotime($request->published_at))
+            : date("Y-m-d H:i:s", time() - 60);
+
+        $slug = $request->slug
+            ? BlogPost::processSlug($request->slug)
+            : BlogPost::processSlug($request->title);
+
+        // Create post
+        $post->update([
+            'title' => $request->title,
+            'slug' => $slug,
+            'content' => $request->content,
+            'status' => $request->status,
+            'comments_enabled' => boolval($request->comments_enabled),
+            'published_at' => $published_at,
+            'blog_image_id' => $request->blog_image_id,
+            'is_featured' => $request->is_featured
+        ]);
+
+        // Update category
+        if($request->category) {
+            $post->categories()->sync($request->category);
+        } else {
+            // No categories selected
+            $post->categories()->detach();
+        }
+
+        // Assign tags
+        $tags = [];
+        if($request->tags) {
+            $tags = array_merge($tags, explode(",", $request->tags));
+        }
+        if(count($request->tag)) {
+            $tags = array_merge($tags, $request->tag);
+        }
+        $post->syncTags($tags);
+
+        // Return
+        return redirect("admin/blog/$post->id/edit")
+            ->with("success", "Blog post updated successfully");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param BlogPost $post
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function destroy(BlogPost $post)
+    {
+        if(auth()->user()->cannot("delete", $post)) {
+            abort(403);
+        }
+
+        $post->delete();
+
+        return redirect("admin/blog")
+            ->with("success", "Blog post deleted successfully");
+    }
+}
