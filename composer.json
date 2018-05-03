@@ -9,9 +9,7 @@
     ],
     "licence": "MIT",
     "minimum-stability": "dev",
-    "require": {
-        "ckeditor/ckeditor": "^4.9"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Lnch\\LaravelBlog\\": "src"

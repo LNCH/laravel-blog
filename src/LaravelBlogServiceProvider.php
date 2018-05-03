@@ -45,11 +45,6 @@ class LaravelBlogServiceProvider extends ServiceProvider
             __DIR__.'/../public' => public_path('vendor/lnch/laravel-blog'),
         ], 'laravel-blog/public');
 
-        // Publish the bundled ckeditor files
-        $this->publishes([
-            app_path().'/../vendor/ckeditor/ckeditor' => public_path('libs/ckeditor'),
-        ], "laravel-blog/ckeditor");
-
         // Register policies
         $this->registerPolicies();
     }

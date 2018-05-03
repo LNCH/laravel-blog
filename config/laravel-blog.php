@@ -86,6 +86,17 @@ return [
          */
         'per_page'          => 10,
 
+        /*
+         * CKEditor related options
+         */
+        'ckeditor' => [
+
+            /*
+             * Location of a custom config file for CKEditor. Relative to public path
+             */
+            'custom_config'     => '/vendor/lnch/laravel-blog/js/ckeditor_config.js',
+
+        ]
     ],
 
     /*

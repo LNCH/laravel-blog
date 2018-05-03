@@ -3,6 +3,7 @@
 namespace Lnch\LaravelBlog\Controllers;
 
 use Lnch\LaravelBlog\Models\BlogPost;
+use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
 class BlogPostController extends Controller
 {
@@ -38,13 +39,13 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $this->breadcrumbs[] = new Breadcrumb('Blog', true);
-
         $posts = BlogPost::whereRaw("TIMESTAMP(published_at) > NOW()")
             ->orderBy("published_at", "asc")
             ->paginate(15);
 
-        return $this->view("admin.blog.index", ['posts' => $posts]);
+        return view("laravel-blog::".$this->viewPath."posts.index", [
+            'posts' => $posts
+        ]);
     }
 
     /**
@@ -58,10 +59,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $this->breadcrumbs[] = new Breadcrumb('Blog', false, url("admin/blog"));
-        $this->breadcrumbs[] = new Breadcrumb('New Post', true);
-
-        return $this->view("admin.blog.editor");
+        return view("laravel-blog::".$this->viewPath."posts.editor");
     }
 
     /**
@@ -76,7 +74,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $siteId = CurrentSite::getCurrentSite()->id;
+        $siteId = getBlogSiteID();
 
         $published_at = $request->published_at
             ? date("Y-m-d H:i:s", strtotime($request->published_at))
@@ -89,11 +87,12 @@ class BlogPostController extends Controller
         // Create post
         $post = BlogPost::create([
             'site_id' => $siteId,
-            'author_id' => auth()->user()->id,
+            'author_id' => auth()->user() ? auth()->user()->id : null,
             'blog_image_id' => $request->blog_image_id,
             'title' => $request->title,
             'slug' =>  $slug,
-            'content' => $request->content,
+            'fb_slug' =>  $slug,
+            'content' => $request->post_content,
             'status' => $request->status,
             'format' => BlogPost::FORMAT_STANDARD,
             'is_approved' => 1,
@@ -114,7 +113,7 @@ class BlogPostController extends Controller
         }
 
         // Return
-        return redirect("admin/blog")
+        return redirect($this->routePrefix."posts")
             ->with("success", "Blog post created successfully");
     }
 
@@ -143,10 +142,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $this->breadcrumbs[] = new Breadcrumb('Blog', false, url("admin/blog"));
-        $this->breadcrumbs[] = new Breadcrumb('Edit Post', true);
-
-        return $this->view("admin.blog.editor", [
+        return view("laravel-blog::".$this->viewPath."posts.editor", [
             'post' => $post
         ]);
     }
@@ -165,7 +161,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $siteId = CurrentSite::getCurrentSite()->id;
+        $siteId = getBlogSiteID();
 
         $published_at = $request->published_at
             ? date("Y-m-d H:i:s", strtotime($request->published_at))
@@ -179,12 +175,13 @@ class BlogPostController extends Controller
         $post->update([
             'title' => $request->title,
             'slug' => $slug,
-            'content' => $request->content,
+            'fb_slug' => $slug,
+            'content' => $request->post_content,
             'status' => $request->status,
             'comments_enabled' => boolval($request->comments_enabled),
             'published_at' => $published_at,
             'blog_image_id' => $request->blog_image_id,
-            'is_featured' => $request->is_featured
+            'is_featured' => boolval($request->is_featured)
         ]);
 
         // Update category
@@ -206,7 +203,7 @@ class BlogPostController extends Controller
         $post->syncTags($tags);
 
         // Return
-        return redirect("admin/blog/$post->id/edit")
+        return redirect($this->routePrefix."posts/$post->id/edit")
             ->with("success", "Blog post updated successfully");
     }
 
@@ -225,7 +222,7 @@ class BlogPostController extends Controller
 
         $post->delete();
 
-        return redirect("admin/blog")
+        return redirect($this->routePrefix."posts")
             ->with("success", "Blog post deleted successfully");
     }
 }

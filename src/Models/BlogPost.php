@@ -215,6 +215,13 @@ class BlogPost extends BlogModel
         return $this->published_at->format("jS F, Y");
     }
 
+    public function getPublishedAtTimestampAttribute()
+    {
+        return $this->published_at->format("Y-m-d") . "T"
+            . $this->published_at->format("H:i");
+    }
+
+
     /**
      * Returns a formatted
      *
