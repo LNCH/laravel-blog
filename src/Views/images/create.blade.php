@@ -47,7 +47,3 @@
     </div> <!-- End .row -->
 
 @endsection
-
-@push("foot")
-    <script src="{{ asset("js/admin/blog.js") }}"></script>
-@endpush

@@ -36,10 +36,17 @@
                             <img src="{{ $image->getUrl() }}" alt="">
                         </a>
 
-                        @if(Request::get("featured", false) || Request::get("embed", false))
+                        @if(Request::get("featured", false))
                             <div class="actions text-center">
-                                <button class="btn btn-xs btn-primary select-featured @if(Request::get("embed", false)) embed @endif" data-id="{{ $image->id }}"
+                                <button class="btn btn-xs btn-primary select-featured" data-id="{{ $image->id }}"
                                     data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
+                                    Select
+                                </button>
+                            </div> <!-- End .actions.text-center -->
+                        @elseif(Request::get("embed", false))
+                            <div class="actions text-center">
+                                <button class="btn btn-xs btn-primary select-featured embed" data-id="{{ $image->id }}"
+                                        data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
                                     Select
                                 </button>
                             </div> <!-- End .actions.text-center -->
@@ -95,55 +102,5 @@
             @endif
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var selectFeatured = $('.select-featured:not(.embed)');
-            selectFeatured.on("click", function(event) {
-                event.preventDefault();
-                var id = $(this).data("id");
-                var url = $(this).data("url");
-                console.log(parent.updateFeaturedImage(id, url));
-            });
-
-            var copyUrl = $(".copy-url");
-            copyUrl.on('click', function(event) {
-                event.preventDefault();
-
-                var copyText = $(this).parent().find("input");
-                copyText.select();
-                document.execCommand("Copy");
-                alert("Image URL copied to your clipboard!");
-            });
-
-
-            function getUrlParam(paramName) {
-                var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
-                var match = window.location.search.match(reParam) ;
-
-                return (match && match.length > 1) ? match[1] : '' ;
-            }
-
-            $(".embed.select-featured").on("click", function() {
-                console.log("click");
-                var funcNum = getUrlParam('CKEditorFuncNum');
-                var imageUrl = $(this).data("url");
-                var imageAlt = $(this).data("alt-text");
-                window.opener.CKEDITOR.tools.callFunction(funcNum, imageUrl, function() {
-                    // Get the reference to a dialog window.
-                    var element, dialog = this.getDialog();
-                    // Check if this is the Image dialog window.
-
-                    if (dialog.getName() == 'image') {
-                        // Get the reference to a text field that holds the "alt" attribute.
-                        element = dialog.getContentElement('info', 'txtAlt');
-                        // Assign the new value.
-                        if (element) element.setValue(imageAlt);
-                    }
-                });
-                window.close();
-            });
-        });
-    </script>
 
 @endsection
