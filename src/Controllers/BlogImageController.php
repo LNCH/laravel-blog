@@ -155,11 +155,26 @@ class BlogImageController extends Controller
     private function uploadFile(UploadedFile $file, BlogImageRequest $request)
     {
         // Create filename
-        $name = $file->getClientOriginalName();
-        $filename = date("Ymd-His-") . $name;
+        $originalFilename = $file->getClientOriginalName();
 
-        $caption = $request->caption ? $request->caption[$name] : '';
-        $alt_text = $request->alt_text ? $request->alt_text[$name] : '';
+        $patterns = [
+            '@\[date\]@is',
+            '@\[datetime\]@is',
+            '@\[filename\]@is',
+        ];
+
+        $matches = [
+            date("Ymd"),
+            date("Ymd-His"),
+            $originalFilename,
+        ];
+
+        $filenamePattern = config("laravel-blog.images.filename_format", "[datetime]_[filename]");
+        $filename = preg_replace($patterns, $matches, $filenamePattern);
+//        $filename = date("Ymd-His-") . $originalFilename;
+
+        $caption = $request->caption ? $request->caption[$originalFilename] : '';
+        $alt_text = $request->alt_text ? $request->alt_text[$originalFilename] : '';
 
         // Create DB record
         BlogImage::create([

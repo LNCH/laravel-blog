@@ -76,9 +76,22 @@ return [
     */
 
     'categories' => [
+
+        /*
+         * Defines whether or not the feature is enabled on the site or not
+         */
         'enabled'           => true,
+
+        /*
+         * The taxonomy will be used in the routes file to define the route
+         */
         'taxonomy'          => 'categories',
+
+        /*
+         * How many records should be shown on the index page
+         */
         'per_page'          => 10,
+
     ],
 
     /*
@@ -91,9 +104,22 @@ return [
     */
 
     'tags' => [
+
+        /*
+         * Defines whether or not the feature is enabled on the site or not
+         */
         'enabled'           => true,
+
+        /*
+         * The taxonomy will be used in the routes file to define the route
+         */
         'taxonomy'          => 'tags',
+
+        /*
+         * How many records should be shown on the index page
+         */
         'per_page'          => 15,
+
     ],
 
     /*
@@ -118,7 +144,7 @@ return [
         'taxonomy'          => 'images',
 
         /*
-         * How many images should be shown on the index page
+         * How many records should be shown on the index page
          */
         'per_page'          => 15,
 
@@ -126,6 +152,15 @@ return [
          * Where Blog Images will be stored. Relative to the public directory
          */
         'storage_path'      => "images/laravel-blog",
+
+        /*
+         * The uploaded file will be stored according to this template, followed
+         * by it's original extension.
+         *
+         * Available tags: [date] [datetime] [filename]
+         *                  Ymd    Ymd-His
+         */
+        'filename_format'   => '[datetime]_[filename]',
 
     ]
 
