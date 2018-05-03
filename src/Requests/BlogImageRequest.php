@@ -16,6 +16,14 @@ class BlogImageRequest extends FormRequest
         return true;
     }
 
+    public function all()
+    {
+        $all = parent::all();
+
+        dd("INTERRUPTION");
+        return $all;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,7 +39,16 @@ class BlogImageRequest extends FormRequest
         {
             case 'POST':
                 $rules['images'] = 'required|array';
+                $rules['images.*'] = 'image';
+
+                $maxSize = config("laravel-blog.images.max_upload_size", 0);
+                if (is_numeric($maxSize) && $maxSize > 0)
+                {
+                    $rules['images.*'] .= "|max:$maxSize";
+                }
+
                 break;
+
             case 'PATCH':
                 $rules['caption'] = 'sometimes|string';
                 $rules['alt_text'] = 'sometimes|string';

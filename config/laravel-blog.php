@@ -161,6 +161,11 @@ return [
          */
         'filename_format'   => '[datetime]_[filename]',
 
+        /*
+         * Maximum size for any individual uploaded image (defined in Kb)
+         */
+        'max_upload_size'   => 10000
+
     ]
 
 ];
