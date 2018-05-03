@@ -19,8 +19,7 @@ class BlogImageController extends Controller
     }
 
     /**
-     * Displays a full list of the active site's uploaded blog
-     * images
+     * Displays a full list of the active site's uploaded blog images
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

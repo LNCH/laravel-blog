@@ -88,32 +88,33 @@
 
             @if($images)
                 <div class="text-right">
-                    {{ $images->appends(['embed' => Request::get("embed", false) ? "true" : "", 'featured' => Request::get("featured", false) ? "true" : ""])->links() }}
+                    {{ $images->appends(['embed' => Request::get("embed", false) ? "true" : "",
+                        'featured' => Request::get("featured", false) ? "true" : ""])->links() }}
                 </div>
             @endif
         </div>
     </div>
 
-@endsection
-
-@push("foot")
     <script>
-        var selectFeatured = $('.select-featured');
-        selectFeatured.on("click", function(event) {
-            event.preventDefault();
-            var id = $(this).data("id");
-            var url = $(this).data("url");
-            console.log(parent.updateFeaturedImage(id, url));
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            var selectFeatured = $('.select-featured');
+            selectFeatured.on("click", function(event) {
+                event.preventDefault();
+                var id = $(this).data("id");
+                var url = $(this).data("url");
+                console.log(parent.updateFeaturedImage(id, url));
+            });
 
-        var copyUrl = $(".copy-url");
-        copyUrl.on('click', function(event) {
-            event.preventDefault();
+            var copyUrl = $(".copy-url");
+            copyUrl.on('click', function(event) {
+                event.preventDefault();
 
-            var copyText = $(this).parent().find("input");
-            copyText.select();
-            document.execCommand("Copy");
-            alert("Image URL copied to your clipboard!");
+                var copyText = $(this).parent().find("input");
+                copyText.select();
+                document.execCommand("Copy");
+                alert("Image URL copied to your clipboard!");
+            });
         });
     </script>
-@endpush
+
+@endsection
