@@ -49,8 +49,8 @@ class BlogImageRequest extends FormRequest
                 break;
 
             case 'PATCH':
-                $rules['caption'] = 'sometimes|string';
-                $rules['alt_text'] = 'sometimes|string';
+                $rules['caption'] = 'nullable|string';
+                $rules['alt_text'] = 'nullable|string';
                 break;
         }
 

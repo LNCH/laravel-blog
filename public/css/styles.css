@@ -154,3 +154,10 @@
 .published_at_container .form-control[readonly] {
     background: white;
 }
+
+
+#featured-image-container img,
+.edit-image-form img {
+    width: 100%;
+    margin-bottom: 1rem;
+}
