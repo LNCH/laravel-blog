@@ -16,8 +16,8 @@
     <script src="https://cdn.ckeditor.com/4.7.3/standard-all/ckeditor.js"></script>
     <script>
         var ckOptions = {
-            filebrowserImageBrowseUrl: '{{ config("laravel-blog.route_prefix") }}/images?embed=true',
-            filebrowserImageUploadUrl: '{{ config("laravel-blog.route_prefix") }}/images/dialog-upload?_token={{ csrf_token() }}'
+            filebrowserImageBrowseUrl: '{{ blogUrl('images?embed=true') }}',
+            filebrowserImageUploadUrl: '{{ blogUrl('images/dialog-upload?_token='.csrf_token()) }}'
         }
 
         @if(config("laravel-blog.posts.ckeditor.custom_config", null))

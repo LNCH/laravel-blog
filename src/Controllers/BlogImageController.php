@@ -2,6 +2,7 @@
 
 namespace Lnch\LaravelBlog\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Lnch\LaravelBlog\Models\BlogImage;
 use Illuminate\Http\UploadedFile;
@@ -151,7 +152,7 @@ class BlogImageController extends Controller
      * @param BlogImageRequest      $request
      * @return string
      */
-    private function uploadFile(UploadedFile $file, BlogImageRequest $request)
+    private function uploadFile(UploadedFile $file, $request)
     {
         // Create filename
         $originalFilename = $file->getClientOriginalName();
@@ -190,53 +191,53 @@ class BlogImageController extends Controller
         return $filename;
     }
 
-//    /**
-//     * Retrieves a request to upload an image from the CKEditor
-//     *
-//     * @param Request $request
-//     * @return string
-//     */
-//    public function dialogUpload(Request $request)
-//    {
-//        $files = request()->file('upload');
-//        $error_bag = [];
-//        foreach (is_array($files) ? $files : [$files] as $file)
-//        {
-//            $new_filename = $this->uploadFile($file, $request);
-//        }
-//
-//        $response = $this->useFile($new_filename);
-//
-//        return $response;
-//    }
+    /**
+     * Retrieves a request to upload an image from the CKEditor
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function dialogUpload(Request $request)
+    {
+        $files = request()->file('upload');
+        $error_bag = [];
+        foreach (is_array($files) ? $files : [$files] as $file)
+        {
+            $new_filename = $this->uploadFile($file, $request);
+        }
 
-//    /**
-//     * Automatically populates the URL field on CKEditor after
-//     * a successful upload.
-//     *
-//     * @param $new_filename
-//     * @return string
-//     */
-//    private function useFile($new_filename)
-//    {
-//        $file = url("/image/original/blog/".$new_filename);
-//
-//        return "<script type='text/javascript'>
-//
-//        function getUrlParam(paramName) {
-//            var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
-//            var match = window.location.search.match(reParam);
-//            return ( match && match.length > 1 ) ? match[1] : null;
-//        }
-//
-//        var funcNum = getUrlParam('CKEditorFuncNum');
-//
-//        var par = window.parent,
-//            op = window.opener,
-//            o = (par && par.CKEDITOR) ? par : ((op && op.CKEDITOR) ? op : false);
-//
-//        if (op) window.close();
-//        if (o !== false) o.CKEDITOR.tools.callFunction(funcNum, '$file');
-//        </script>";
-//    }
+        $response = $this->useFile($new_filename);
+
+        return $response;
+    }
+
+    /**
+     * Automatically populates the URL field on CKEditor after
+     * a successful upload.
+     *
+     * @param $new_filename
+     * @return string
+     */
+    private function useFile($new_filename)
+    {
+        $file = url(config("laravel-blog.images.storage_path")."/".$new_filename);
+
+        return "<script type='text/javascript'>
+
+        function getUrlParam(paramName) {
+            var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
+            var match = window.location.search.match(reParam);
+            return ( match && match.length > 1 ) ? match[1] : null;
+        }
+
+        var funcNum = getUrlParam('CKEditorFuncNum');
+
+        var par = window.parent,
+            op = window.opener,
+            o = (par && par.CKEDITOR) ? par : ((op && op.CKEDITOR) ? op : false);
+
+        if (op) window.close();
+        if (o !== false) o.CKEDITOR.tools.callFunction(funcNum, '$file');
+        </script>";
+    }
 }

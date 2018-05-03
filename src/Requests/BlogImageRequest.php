@@ -20,7 +20,6 @@ class BlogImageRequest extends FormRequest
     {
         $all = parent::all();
 
-        dd("INTERRUPTION");
         return $all;
     }
 
