@@ -33,7 +33,7 @@ class LaravelBlogServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // Load package views
-        $this->loadViewsFrom(__DIR__.'/views', 'laravel-blog');
+        $this->loadViewsFrom(__DIR__.'/Views', 'laravel-blog');
 
         // Publish config files
         $this->publishes([
@@ -72,7 +72,7 @@ class LaravelBlogServiceProvider extends ServiceProvider
         });
 
         // Allow routing to work
-        include __DIR__.'/routes/web.php';
+        include __DIR__.'/Routes/web.php';
     }
 
     public function registerPolicies()

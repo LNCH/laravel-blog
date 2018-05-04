@@ -9,7 +9,7 @@
         </div> <!-- End .col-sm-12 -->
 
         <div class="col-sm-3">
-            @include("laravel-blog::tags.form")
+            @include("laravel-blog::form")
         </div> <!-- End .col-sm-3 -->
 
         <div class="col-sm-9">
