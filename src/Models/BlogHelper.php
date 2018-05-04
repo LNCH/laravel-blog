@@ -6,7 +6,6 @@ class BlogHelper
 {
     public function initCKEditor()
     {
-
         $script = "<script src='".config("laravel-blog.posts.ckeditor.path", "")."'></script>
         <script>
             var ckOptions = {
