@@ -62,7 +62,6 @@ return [
     */
 
     'view_layout' => "laravel-blog::layout",
-
     'view_content' => 'content',
 
     /*
