@@ -28,8 +28,8 @@ Route::group(['prefix' => config("laravel-blog.route_prefix"), 'middleware' => '
         );
     }
 
-    if (config("laravel-blog.images.enabled")) {
-
+    if (config("laravel-blog.images.enabled"))
+    {
         Route::post(config("laravel-blog.images.taxonomy")."/dialog-upload",
             "Lnch\LaravelBlog\Controllers\BlogImageController@dialogUpload");
         
