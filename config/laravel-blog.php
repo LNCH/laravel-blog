@@ -67,7 +67,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Post Options
+    | Frontend Options
+    |--------------------------------------------------------------------------
+    |
+    | All config options related to the way posts, categories, tags and images
+    | are displayed on the frontend.
+    |
+    */
+
+    'frontend' => [
+
+        /*
+         * How many posts should be displayed per page on the frontend
+         */
+        'posts_per_page'    => 10,
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Post Admin Options
     |--------------------------------------------------------------------------
     |
     | All config options related to the blog posts.
@@ -114,7 +133,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Category Options
+    | Category Admin Options
     |--------------------------------------------------------------------------
     |
     | All config options related to the blog categories.
@@ -142,7 +161,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Tag Options
+    | Tag Admin Options
     |--------------------------------------------------------------------------
     |
     | All config options related to the blog tags.
@@ -170,7 +189,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Image Options
+    | Image Admin Options
     |--------------------------------------------------------------------------
     |
     | All config options related to the blog images.

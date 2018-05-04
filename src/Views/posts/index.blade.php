@@ -13,6 +13,10 @@
 
         <div class="col-sm-12">
 
+            @if(LaravelBlog::hasPosts())
+                HELLO THURE
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
