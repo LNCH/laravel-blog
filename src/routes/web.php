@@ -3,6 +3,8 @@
 
 Route::group(['prefix' => config("laravel-blog.route_prefix"), 'middleware' => 'web'], function() {
 
+    Route::get("/", "Lnch\LaravelBlog\Controllers\BlogPostController@index");
+
     Route::get(config("laravel-blog.posts.taxonomy")."/scheduled",
         "Lnch\LaravelBlog\Controllers\BlogPostController@scheduled");
     Route::resource(config("laravel-blog.posts.taxonomy"),
