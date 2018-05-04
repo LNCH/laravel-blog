@@ -60,7 +60,7 @@ class CreateBlogTables extends Migration
             $table->boolean("is_approved");
             $table->unsignedInteger("approved_by")->nullable();
             $table->boolean("comments_enabled")->nullable();
-            $table->timestamp("published_at")->default(NULL);
+            $table->timestamp("published_at")->default(\Illuminate\Support\Facades\DB::raw("CURRENT_TIMESTAMP"));
             $table->timestamps();
             $table->softDeletes();
 
