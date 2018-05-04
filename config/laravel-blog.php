@@ -192,7 +192,8 @@ return [
         'storage_location'  => 'storage',
 
         /*
-         * Where Blog Images will be stored. Relative to the public directory
+         * Where Blog Images will be stored. Relative to the public directory if the storage_location
+         * is set to 'public' or the storage/app/public directory if set to 'storage'
          */
         'storage_path'      => "images/laravel-blog",
 
