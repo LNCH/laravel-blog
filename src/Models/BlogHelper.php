@@ -102,7 +102,7 @@ class BlogHelper
     {
         return BlogCategory::whereHas("posts", function($query) {
             $query->where("status", BlogPost::STATUS_ACTIVE)
-                ->where('site_id', getBlogSiteID()s)
+                ->where('site_id', getBlogSiteID())
                 ->where('published_at', '<', date('Y-m-d H:i:s'));
         })
             ->limit($count)
