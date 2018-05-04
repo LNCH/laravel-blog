@@ -101,6 +101,14 @@ return [
              */
             'custom_config'     => '/vendor/lnch/laravel-blog/js/ckeditor_config.js',
 
+            /*
+             * Route for the custom file browser. Relative to your 'route_prefix' defined
+             * above
+             */
+            'file_browser_url'  => 'images?embed=true',
+
+            'image_upload_url'  => 'images/dialog-upload',
+
         ]
     ],
 

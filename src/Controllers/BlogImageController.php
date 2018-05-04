@@ -234,7 +234,18 @@ class BlogImageController extends Controller
      */
     private function useFile($new_filename)
     {
-        $file = url(config("laravel-blog.images.storage_path")."/".$new_filename);
+        if(config("laravel-blog.images.storage_location") == "storage")
+        {
+            $file = url("storage/".config("laravel-blog.images.storage_path")."/".$new_filename);
+        }
+        else if(config("laravel-blog.images.storage_location") == "public")
+        {
+            $file = url(config("laravel-blog.images.storage_path")."/".$new_filename);
+        }
+        else
+        {
+            throw new \Exception("images.storage_path has not been properly defined");
+        }
 
         return "<script type='text/javascript'>
 
