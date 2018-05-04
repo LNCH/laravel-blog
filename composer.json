@@ -1,6 +1,6 @@
 {
     "name": "lnch/laravel-blog",
-    "description": "A complete Blog module, with category, tag, images and comments support",
+    "description": "A complete Blog module, with category, tag, and images",
     "authors": [
         {
             "name": "Tom Lynch",
