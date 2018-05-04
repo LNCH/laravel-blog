@@ -187,6 +187,11 @@ return [
         'per_page'          => 15,
 
         /*
+         * Storage location. Options are 'public' or 'storage'
+         */
+        'storage_location'  => 'storage',
+
+        /*
          * Where Blog Images will be stored. Relative to the public directory
          */
         'storage_path'      => "images/laravel-blog",

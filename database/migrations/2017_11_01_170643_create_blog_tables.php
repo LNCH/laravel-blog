@@ -173,6 +173,7 @@ class CreateBlogTables extends Migration
         Schema::create("blog_post_images", function (Blueprint $table) {
             $table->increments("id");
             $table->unsignedInteger("site_id")->nullable();
+            $table->string("storage_location");
             $table->string("path");
             $table->string("caption")->nullable();
             $table->string("alt_text")->nullable();

@@ -20,16 +20,20 @@ $(function() {
                 $form.removeClass('is-dragover');
             })
             .on('drop', function(e) {
-                document.querySelector('#images').files = e.originalEvent.dataTransfer.files;
+                document.querySelector('#images-upload').files = e.originalEvent.dataTransfer.files;
             });
     }
 
     var pendingImagesContainer = $(".pending-images");
 
+    $("#images-upload").on("change", function() {
+        previewFiles();
+    });
+
     // Allows image files to be previewed
     function previewFiles() {
         pendingImagesContainer.empty();
-        var files   = document.querySelector('#images').files;
+        var files   = document.querySelector('#images-upload').files;
         var count   = 0;
 
         function readAndPreview(file) {

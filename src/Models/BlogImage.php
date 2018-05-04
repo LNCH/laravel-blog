@@ -10,6 +10,7 @@ class BlogImage extends BlogModel
 
     protected $fillable = [
         'site_id',
+        'storage_location',
         'path',
         'caption',
         'alt_text',
@@ -24,6 +25,11 @@ class BlogImage extends BlogModel
      */
     public function getPath()
     {
+        if ($this->storage_location == "storage")
+        {
+            return public_path("storage/".config("laravel-blog.images.storage_path") . "/" . $this->path);
+        }
+
         return public_path(config("laravel-blog.images.storage_path") . '/' . $this->path);
     }
 
@@ -34,6 +40,11 @@ class BlogImage extends BlogModel
      */
     public function getUrl()
     {
+        if ($this->storage_location == "storage")
+        {
+            return url("storage/".config("laravel-blog.images.storage_path") . "/" . $this->path);
+        }
+
         return url(config("laravel-blog.images.storage_path") . "/" . $this->path);
     }
 }

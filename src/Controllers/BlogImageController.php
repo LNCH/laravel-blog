@@ -171,21 +171,35 @@ class BlogImageController extends Controller
 
         $filenamePattern = config("laravel-blog.images.filename_format", "[datetime]_[filename]");
         $filename = preg_replace($patterns, $matches, $filenamePattern);
-//        $filename = date("Ymd-His-") . $originalFilename;
 
         $caption = $request->caption ? $request->caption[$originalFilename] : '';
         $alt_text = $request->alt_text ? $request->alt_text[$originalFilename] : '';
 
+        $storageLocation = config("laravel-blog.images.storage_location");
+
         // Create DB record
         BlogImage::create([
             'site_id' => getBlogSiteID(),
+            'storage_location' => $storageLocation,
             'path' => $filename,
             'caption' => $caption,
             'alt_text' => $alt_text,
         ]);
 
         // Upload file
-        $destinationPath = public_path(config("laravel-blog.images.storage_path"));
+        if ($storageLocation == "public")
+        {
+            $destinationPath = public_path(config("laravel-blog.images.storage_path"));
+        }
+        else if($storageLocation == "storage")
+        {
+            $destinationPath = storage_path("app/public/".config("laravel-blog.images.storage_path"));
+        }
+        else
+        {
+            throw new \Exception("images.storage_path has not been properly defined");
+        }
+
         $file->move($destinationPath, $filename);
 
         return $filename;

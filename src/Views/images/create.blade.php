@@ -26,8 +26,8 @@
                                     <span class="no-drag">Select Images</span>
                                     <span class="drag">Click here, or drag images here to upload</span>
                                 </label>
-                                <input type="file" class="form-control" name="images[]" id="images"
-                                       multiple onchange="previewFiles()" accept=".jpg,.jpeg,.png,.gif" required />
+                                <input type="file" class="form-control" name="images[]" id="images-upload"
+                                       multiple accept=".jpg,.jpeg,.png,.gif" required />
                             </div>
                         </div>
                     </div> <!-- End .col-sm-6 -->
