@@ -78,7 +78,7 @@ $(function() {
     });
 
     // Select script for featured images
-    var selectFeatured = $('.select-featured:not(.embed)');
+    var selectFeatured = $('.select-featured');
     selectFeatured.on("click", function(event) {
         console.log("Click");
         event.preventDefault();
@@ -107,8 +107,9 @@ $(function() {
         return (match && match.length > 1) ? match[1] : '' ;
     }
 
-    $(".embed.select-featured").on("click", function() {
-        console.log("click");
+    // Select image dialog box
+    $(".ck-select-image").on("click", function(event) {
+        event.preventDefault();
         var funcNum = getUrlParam('CKEditorFuncNum');
         var imageUrl = $(this).data("url");
         var imageAlt = $(this).data("alt-text");

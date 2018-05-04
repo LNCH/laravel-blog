@@ -32,9 +32,16 @@
                 @forelse($images as $image)
                     <div class="image">
 
-                        <a href="{{ $image->getUrl() }}" target="_blank">
-                            <img src="{{ $image->getUrl() }}" alt="">
-                        </a>
+                        @if(Request::get("embed", false))
+                            <a href="{{ $image->getUrl() }}" target="_blank" class="ck-select-image"
+                               data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
+                                <img src="{{ $image->getUrl() }}" alt="">
+                            </a>
+                        @else
+                            <a href="{{ $image->getUrl() }}" target="_blank">
+                                <img src="{{ $image->getUrl() }}" alt="">
+                            </a>
+                        @endif
 
                         @if(Request::get("featured", false))
                             <div class="actions text-center">
@@ -45,7 +52,7 @@
                             </div> <!-- End .actions.text-center -->
                         @elseif(Request::get("embed", false))
                             <div class="actions text-center">
-                                <button class="btn btn-xs btn-primary select-featured embed" data-id="{{ $image->id }}"
+                                <button class="btn btn-xs btn-primary ck-select-image" data-id="{{ $image->id }}"
                                         data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
                                     Select
                                 </button>
