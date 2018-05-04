@@ -22,7 +22,10 @@
         "laravel": {
             "providers": [
                 "Lnch\\LaravelBlog\\LaravelBlogServiceProvider"
-            ]
+            ],
+			"aliases": {
+				"LaravelBlog": "Lnch\\LaravelBlog\\LaravelBlogFacade"
+			}
         }
     }
 }
