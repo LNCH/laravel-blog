@@ -1,5 +1,10 @@
 * [Installation](#installation)
 * [Usage](#usage)
+    * [Frontend Routes](#frontend-routes)
+    * [Backend Routes](#backend-routes)
+* [Policies](#policies)
+* [Configuration](#configuration)
+* [Marking Posts per Site](#marking-posts-per-site)
 
 ## Installation
 
