@@ -22,7 +22,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <div class="drag-upload">
-                                <label for="images">
+                                <label for="images-upload">
                                     <span class="no-drag">Select Images</span>
                                     <span class="drag">Click here, or drag images here to upload</span>
                                 </label>
