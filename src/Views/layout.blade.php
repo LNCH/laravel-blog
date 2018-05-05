@@ -17,7 +17,7 @@
                         <div class="col-md-12">
 
                             <p class="navbar-brand" style="margin: 0;">
-                                <a href="{{ blogUrl("") }}">
+                                <a href="{{ blogUrl("", true) }}">
                                     Laravel Blog
                                 </a>
                             </p>

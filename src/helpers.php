@@ -11,9 +11,17 @@ function getBlogSiteID()
     return $siteClassInstance ? $siteClassInstance::getSiteId() : null;
 }
 
-function blogUrl($url)
+function blogUrl($url, $frontend = false)
 {
-    $routePrefix = config("laravel-blog.route_prefix", "");
+    if ($frontend === true)
+    {
+        $routePrefix = config("laravel-blog.frontend_route_prefix", "");
+    }
+    else
+    {
+        $routePrefix = config("laravel-blog.route_prefix", "");
+    }
+
     if ($routePrefix && substr($routePrefix, -1) !== "/") {
         $routePrefix .= "/";
     }

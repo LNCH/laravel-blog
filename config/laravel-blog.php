@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'route_prefix' => 'blog',
+    'route_prefix' => 'admin/blog',
 
-    'frontend_route_prefix' => '',
+    'frontend_route_prefix' => 'blog',
 
     /*
     |--------------------------------------------------------------------------
