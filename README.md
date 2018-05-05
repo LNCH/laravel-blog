@@ -89,8 +89,6 @@ Refer to the table below to see which interfaces you should implement for each m
 | \Lnch\LaravelBlog\Models\BlogCategory | \Lnch\LaravelBlog\Contracts\BlogCategoryPolicyInterface |
 | \Lnch\LaravelBlog\Models\BlogImage | \Lnch\LaravelBlog\Contracts\BlogImagePolicyInterface |
 
-## Marking posts per Site
-
 ## Configuration
 
 To modify the configuration of the package, you can publish the config file with the following command:
@@ -101,25 +99,31 @@ php artisan vendor:publish --tag="laravel-blog/config"
 This will create a local copy of the configuration file for you to edit. That you can modify to suit your needs. The config
 file is commented to assist you in modifying the properties.
 
+## Marking posts per Site
 
+If your project has a concept of multiple sites, and you want to restrict posts, tags, categories and images only to 
+a certain site, the package is set up for that.
 
+To being with, create a new class that implements `Lnch\LaravelBlog\Contracts\SiteInterface`. This contract only has 
+one public static function, with the following signature;
 
+```php
+public static function getSiteId();
+```
 
+Your model should use this function to define the ID of the Site you wish to link blog posts too at the time. The function
+should return either NULL or an integer to define the active site.
 
+Once you have created your model, you will have to update two configuration properties as so:
 
+```php
+    // ...
+    
+    'site_model' => Lnch\LaravelBlog\Models\Site::class,
+    
+    'site_primary_key' => 'id',
+```
 
+Update the `site_model` to the qualified class name of your site class, and if your Site model uses something other than
+`id` as it's primary key, change the `site_primary_key` property to represent this.
 
-
-
-
-
-- Explain helper functions
-- Demonstrate facade
-- Explain caching
-- Demonstrate Artisan commands
-- List events (future)
-- How to use the Site functionality
-- How to override the policies (interface)
-- How to override the controllers
-- How to override the views + layouts
-- How to override the request classes
