@@ -53,26 +53,27 @@ The package also makes use of jQuery so you will also need to reference this bef
 
 ## Usage
 
-After installation, a set of routes, controllers and views are provided to allow instant use of the package. The routes provided are as follows;
+After installation, a set of routes, controllers and views are provided to allow instant use of the package. All controllers referenced are namespaced to `Lnch\LaravelBlog\Controllers` The routes provided are as follows:
 
 ### Frontend Routes
 
-| Route                 | Functionality |
-| --------------------- | ------------- |
-| /blog                 | Displays all blog posts (frontend) |
-| /blog/{id}/{slug?}    | Displays all blog posts (frontend) |
+| Route                 | Functionality                      | Controller           |
+| --------------------- | ---------------------------------- | -------------------- |
+| /blog                 | Displays all blog posts (frontend) | BlogController@index |
+| /blog/{id}/{slug?}    | Displays an individual post        | BlogController@show  |
 
 ### Backend Routes
 
 All backend routes, excluding scheduled posts, are resource routes. Not all HTTP verbs are included with each resource controller. Excluded routes are noted below.
 
-| Route                 | Functionality | Excluded Verbs |
-| --------------------- | ------------- | -------------- |
-| /admin/blog/posts             | Allows management of blog posts   | |
-| /admin/blog/posts/scheduled        | Allows management of scheduled blog posts   | |
-| /admin/blog/tags              | Allows management of tags         | create, show |
-| /admin/blog/categories        | Allows management of catgegories  | show |
-| /admin/blog/images            | Allows management of images       | show |
+| Route                         | Functionality                              | Controller                   | Excluded Verbs |
+| ----------------------------- | ------------------------------------------ | ---------------------------- | -------------- |
+| /admin/blog/posts             | Allows management of blog posts            | BlogPostController           |                |
+| /admin/blog/posts/scheduled   | Allows management of scheduled blog posts  | BlogPostController@scheduled |                |
+| /admin/blog/tags              | Allows management of tags                  | BlogTagController            | create, show   |
+| /admin/blog/categories        | Allows management of catgegories           | BlogCategoryController       | show           |
+| /admin/blog/images            | Allows management of images                | BlogImageController          | show           |
+
 
 
 You can publish the config file with:
