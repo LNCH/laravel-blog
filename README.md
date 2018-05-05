@@ -1,4 +1,86 @@
-- How to install
+* [Installation](#installation)
+* [Usage](#usage)
+
+## Installation
+
+This package can be used in Laravel 5.4 or higher.
+
+In Laravel 5.5 the service provider and facade will automatically get registered. In older versions of the framework just add the service provider and facade in `config/app.php` file:
+
+```php
+'providers' => [
+    // ...
+    Lnch\LaravelBlog\LaravelBlogServiceProvider::class,
+];
+```
+
+```php
+'aliases' => [
+    // ...
+    Lnch\LaravelBlog\LaravelBlogFacade::class
+]
+```
+
+Once the package is installed, the database migrations must be run. You can optionally publish the migrations to your database/migrations directory if desired using the command below
+
+```bash
+php artisan vendor:publish --tag="laravel-blog/migrations"
+```
+
+To create the relevant DB tables for the blog, run the migrations like so:
+
+```bash
+php artisan migrate
+```
+
+For the blog to function properly, you must also publish the public assets provided. These will be published to the `public/vendor/lnch/laravel-blog` directory. Run the following command to publish the assets:
+
+```bash
+php artisan vendor:publish --tag="laravel-blog/public"
+```
+
+If you are using the provided layouts then you do not need to reference these public files after publishing them. If you are using a custom layout (explained below in the [config](#config) section), you will have to reference the CSS and JS files like so in your layout:
+
+```html
+<link rel="stylesheet" href="{{ asset("vendor/lnch/laravel-blog/css/styles.css") }}" />
+```
+
+```html
+<script src="{{ asset("vendor/lnch/laravel-blog/js/blog.js") }}"></script>
+```
+
+The package also makes use of jQuery so you will also need to reference this before the package JS file if you are using your own layouts.
+
+
+##Usage
+
+After installation, a set of routes, controllers and views are provided to allow instant use of the package. The routes provided are as follows;
+
+| Route         | Functionality |
+| ------------- |---------------|
+| /blog     | Displays all blog posts (frontend) |
+
+
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="laravel-blog/config"
+```
+
+This will create a local copy of the configuration file for you to edit.
+
+
+
+
+
+
+
+
+
+
+
+-How to install
+- Routing
 - Basic configuration
 - Explain helper functions
 - Demonstrate facade
