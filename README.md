@@ -74,17 +74,32 @@ All backend routes, excluding scheduled posts, are resource routes. Not all HTTP
 | /admin/blog/categories        | Allows management of catgegories           | BlogCategoryController       | show           |
 | /admin/blog/images            | Allows management of images                | BlogImageController          | show           |
 
+For more in depth instruction in how to use the various features of the package, please read the documentation pages
 
+## Policies
 
-You can publish the config file with:
+A number of Policy classes are included, that by default will allow all actions to all users. If you would like to define your own Policy classes for the included models, a set of interfaces are provided to ensure your policies contain all necessary functionality.
+
+Refer to the table below to see which interfaces you should implement for each model
+
+| Model | Interface |
+| --- | --- |
+| \Lnch\LaravelBlog\Models\BlogPost | \Lnch\LaravelBlog\Contracts\BlogPostPolicyInterface |
+| \Lnch\LaravelBlog\Models\BlogTag | \Lnch\LaravelBlog\Contracts\BlogTagPolicyInterface |
+| \Lnch\LaravelBlog\Models\BlogCategory | \Lnch\LaravelBlog\Contracts\BlogCategoryPolicyInterface |
+| \Lnch\LaravelBlog\Models\BlogImage | \Lnch\LaravelBlog\Contracts\BlogImagePolicyInterface |
+
+## Marking posts per Site
+
+## Configuration
+
+To modify the configuration of the package, you can publish the config file with the following command:
 
 ```bash
 php artisan vendor:publish --tag="laravel-blog/config"
 ```
-
-This will create a local copy of the configuration file for you to edit.
-
-
+This will create a local copy of the configuration file for you to edit. That you can modify to suit your needs. The config
+file is commented to assist you in modifying the properties.
 
 
 
@@ -94,9 +109,10 @@ This will create a local copy of the configuration file for you to edit.
 
 
 
--How to install
-- Routing
-- Basic configuration
+
+
+
+
 - Explain helper functions
 - Demonstrate facade
 - Explain caching
