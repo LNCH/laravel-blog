@@ -190,7 +190,7 @@ class BlogPost extends BlogModel
      */
     public function getUrlAttribute()
     {
-        $url = url("blog/$this->id/" . $this->slug);
+        $url = url(config("laravel-blog.frontend_route_prefix")."/$this->id/" . $this->slug);
         return $url;
     }
 
@@ -201,7 +201,7 @@ class BlogPost extends BlogModel
      */
     public function getCommentsUrlAttribute()
     {
-        $url = url("blog/post/$this->id/");
+        $url = url(config("laravel-blog.frontend_route_prefix")."/$this->id/");
         return $url;
     }
 

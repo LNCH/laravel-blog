@@ -5,7 +5,7 @@
     <div class="row">
 
         <div class="col-sm-12">
-            <h3>{{ isset($post) ? 'Edit' : 'New' }} Blog Post</h3>
+            <h3>{{ isset($post) ? 'Edit' : 'New' }} {{ config("laravel-blog.taxonomy", "Blog") }} Post</h3>
             <hr />
         </div>
 

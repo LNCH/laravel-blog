@@ -2,6 +2,8 @@
 
 namespace Lnch\LaravelBlog\Models;
 
+use Illuminate\Support\Facades\Request;
+
 class BlogHelper
 {
     /**
@@ -13,6 +15,11 @@ class BlogHelper
     public function hasPosts()
     {
         return self::getPublishedPosts()->exists();
+    }
+
+    public static function isEmbeddedView()
+    {
+        return Request::get("embed", false);
     }
 
     /**

@@ -5,17 +5,13 @@
     <div class="row">
 
         <div class="col-sm-6">
-            <h3>Blog Posts</h3>
+            <h3>{{ config("laravel-blog.taxonomy", "Blog") }} Posts</h3>
         </div> <!-- End .col-sm-6 -->
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">
             <a href="{{ blogUrl("posts/create") }}" class="btn btn-primary">New Post</a>
         </div>
 
         <div class="col-sm-12">
-
-            @if(LaravelBlog::hasPosts())
-                HELLO THURE
-            @endif
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -24,9 +20,15 @@
                             <th style="width: 30%;">Title</th>
                             <th>Author</th>
                             <th>Status</th>
-                            <th>Categories</th>
-                            <th>Tags</th>
-                            <th>Comments</th>
+                            @if(config("laravel-blog.categories.enabled"))
+                                <th>Categories</th>
+                            @endif
+                            @if(config("laravel-blog.tags.enabled"))
+                                <th>Tags</th>
+                            @endif
+                            {{--@if(config("laravel-blog.categories.enabled"))--}}
+                                {{--<th>Comments</th>--}}
+                            {{--@endif--}}
                             <th>Published</th>
                             <th style="width: 12.5%;">Actions</th>
                         </tr>
@@ -52,19 +54,23 @@
                             <td>
                                 {{ \Lnch\LaravelBlog\Models\BlogPost::statuses()[$post->status] }}
                             </td>
-                            <td style="font-style: italic; color: grey;">
-                                {{ implode(", ", $post->categories()->pluck("name")->toArray()) }}
-                            </td>
-                            <td style="font-style: italic; color: grey;">
-                                {{ implode(", ", $post->tags()->pluck("name")->toArray()) }}
-                            </td>
-                            <td>
-                                @if($post->comments_enabled)
+                            @if(config("laravel-blog.categories.enabled"))
+                                <td style="font-style: italic; color: grey;">
+                                    {{ implode(", ", $post->categories()->pluck("name")->toArray()) }}
+                                </td>
+                            @endif
+                            @if(config("laravel-blog.tags.enabled"))
+                                <td style="font-style: italic; color: grey;">
+                                    {{ implode(", ", $post->tags()->pluck("name")->toArray()) }}
+                                </td>
+                            @endif
+                            {{--<td>--}}
+                                {{--@if($post->comments_enabled)--}}
                                     {{-- Comments count --}}
-                                @else
-                                    <div class="text-muted">Disabled</div>
-                                @endif
-                            </td>
+                                {{--@else--}}
+                                    {{--<div class="text-muted">Disabled</div>--}}
+                                {{--@endif--}}
+                            {{--</td>--}}
                             <td>
                                 {{ $post->published_at->format("d/m/Y H:i") }}
                             </td>

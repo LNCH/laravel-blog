@@ -5,7 +5,7 @@
     <div class="row header">
 
         <div class="col-sm-6">
-            <h3>Blog Images</h3>
+            <h3>{{ config("laravel-blog.taxonomy", "Blog") }} Images</h3>
         </div> <!-- End .col-sm-6 -->
 
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">

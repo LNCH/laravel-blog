@@ -161,3 +161,45 @@
     width: 100%;
     margin-bottom: 1rem;
 }
+
+
+.post, .single-post {
+    display: flex;
+    flex-wrap: wrap;
+}
+.post {
+    padding: 1rem;
+    border: 1px solid #DADADA;
+    margin-bottom: 1em;
+}
+
+.post-image {
+    flex: 0 0 25%;
+}
+
+.post-image img {
+    max-width: 100%;
+}
+
+.post-details {
+    flex: 0 0 75%;
+    padding: 0 1em;
+}
+
+.post-title {
+    margin: 0.25em 0 0.5em;
+    font-size: 2em;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: grey;
+    margin-bottom: 1em;
+    border-top: 1px solid whitesmoke;
+    padding: 0.75em 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.post-content {
+    flex: 0 0 100%;
+}

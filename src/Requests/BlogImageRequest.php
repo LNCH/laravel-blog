@@ -16,13 +16,6 @@ class BlogImageRequest extends FormRequest
         return true;
     }
 
-    public function all()
-    {
-        $all = parent::all();
-
-        return $all;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

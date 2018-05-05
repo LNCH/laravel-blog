@@ -5,7 +5,7 @@
     <div class="row">
 
         <div class="col-sm-6">
-            <h3>Categories</h3>
+            <h3>{{ config("laravel-blog.taxonomy", "Blog") }} Categories</h3>
         </div> <!-- End .col-sm-6 -->
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">
             <a href="{{ blogUrl("categories/create") }}" class="btn btn-primary">New Category</a>

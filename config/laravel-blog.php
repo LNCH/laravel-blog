@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'route_prefix' => 'blog',
+    'route_prefix' => 'admin/blog',
+
+    'frontend_route_prefix' => 'blog',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,6 +28,18 @@ return [
     */
 
     'views_path' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Taxonomy
+    |--------------------------------------------------------------------------
+    |
+    | The system is built as a blog. If you'd rather use 'News' Posts, or 'Event'
+    | posts for example, this setting will change the default value.
+    |
+    */
+
+    'taxonomy' => 'Blog',
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +76,6 @@ return [
     */
 
     'view_layout' => "laravel-blog::layout",
-
     'view_content' => 'content',
 
     /*
