@@ -13,6 +13,8 @@
 
         <div class="col-sm-12">
 
+            @include("laravel-blog::actions")
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <colgroup>

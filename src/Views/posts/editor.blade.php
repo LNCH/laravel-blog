@@ -9,6 +9,8 @@
             <hr />
         </div>
 
+        @include("laravel-blog::actions")
+
         @include("laravel-blog::posts.form")
 
     </div> <!-- End .row -->

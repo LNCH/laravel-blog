@@ -8,6 +8,8 @@
             <h3>Tags</h3>
         </div> <!-- End .col-sm-12 -->
 
+        @include("laravel-blog::actions")
+
         <div class="col-sm-3">
             @include("laravel-blog::form")
         </div> <!-- End .col-sm-3 -->

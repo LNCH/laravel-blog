@@ -28,6 +28,9 @@
 
     <div class="row">
         <div class="col-sm-12">
+
+            @include("laravel-blog::actions")
+
             <div class="images-flex">
                 @forelse($images as $image)
                     <div class="image">
