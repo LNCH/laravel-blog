@@ -77,7 +77,7 @@
 
 .images-flex .image {
     position: relative;
-    flex: 1 1 18%;
+    flex: 0 0 18%;
     margin: 0 1% 1.5rem 1%;
     border: 1px solid #d2d2d2;
     background: #f3f3f3;
