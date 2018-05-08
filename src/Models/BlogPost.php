@@ -231,4 +231,12 @@ class BlogPost extends BlogModel
     {
         return url("blog/author/{$this->author->id}-" . strtolower(str_replace(" ", "-", $this->author->name)));
     }
+
+    public function isWithinDays($days = 7)
+    {
+        $date = strtotime("-$days days");
+        $postDate = strtotime($this->published_at);
+
+        return $postDate > $date;
+    }
 }

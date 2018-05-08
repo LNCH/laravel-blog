@@ -8,6 +8,8 @@
 
             <h3>Edit Image</h3>
 
+            @include("laravel-blog::actions")
+
             <form action="{{ blogUrl("images/$image->id") }}" method="post" id="image-upload-form">
                 {{ csrf_field() }} {{ method_field("PATCH") }}
 

@@ -8,6 +8,8 @@
 
             <h3>Upload Images</h3>
 
+            @include("laravel-blog::actions")
+
             <form action="{{ blogUrl("images") }}" method="post" id="image-upload-form" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
