@@ -3,6 +3,8 @@
 namespace Lnch\LaravelBlog\Controllers;
 
 use Lnch\LaravelBlog\Events\BlogPostCreated;
+use Lnch\LaravelBlog\Events\BlogPostDeleted;
+use Lnch\LaravelBlog\Events\BlogPostUpdated;
 use Lnch\LaravelBlog\Models\BlogPost;
 use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
@@ -165,7 +167,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $oldPost = $post;
+        $oldPost = clone $post;
 
         $siteId = getBlogSiteID();
 
@@ -209,7 +211,7 @@ class BlogPostController extends Controller
         $post->syncTags($tags);
 
         // Dispatch the updated event
-        event(new BlogPostCreated($oldPost, $post));
+        event(new BlogPostUpdated($oldPost, $post));
 
         // Return
         return redirect($this->routePrefix."posts/$post->id/edit")
@@ -229,7 +231,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        $oldPost = $post;
+        $oldPost = clone $post;
 
         $post->delete();
 
