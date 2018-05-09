@@ -2,6 +2,7 @@
 
 namespace Lnch\LaravelBlog\Controllers;
 
+use Lnch\LaravelBlog\Events\BlogPostCreated;
 use Lnch\LaravelBlog\Models\BlogPost;
 use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
@@ -112,6 +113,9 @@ class BlogPostController extends Controller
             $post->syncTags($tags);
         }
 
+        // Dispatch the created event
+        event(new BlogPostCreated($post));
+
         // Return
         return redirect($this->routePrefix."posts")
             ->with("success", "Blog post created successfully");
@@ -161,6 +165,8 @@ class BlogPostController extends Controller
             abort(403);
         }
 
+        $oldPost = $post;
+
         $siteId = getBlogSiteID();
 
         $published_at = $request->published_at
@@ -202,6 +208,9 @@ class BlogPostController extends Controller
         }
         $post->syncTags($tags);
 
+        // Dispatch the updated event
+        event(new BlogPostCreated($oldPost, $post));
+
         // Return
         return redirect($this->routePrefix."posts/$post->id/edit")
             ->with("success", "Blog post updated successfully");
@@ -220,7 +229,12 @@ class BlogPostController extends Controller
             abort(403);
         }
 
+        $oldPost = $post;
+
         $post->delete();
+
+        // Dispatch the deleted event
+        event(new BlogPostDeleted($oldPost));
 
         return redirect($this->routePrefix."posts")
             ->with("success", "Blog post deleted successfully");
