@@ -1,3 +1,7 @@
+# Laravel Blog
+ 
+This package has been designed for use with installations of **Laravel 5.4 and above.** It may well function perfectly well in previous versions but as of the time of writing these docs, it has not been tested and is not supported.
+
 * [Installation](#installation)
 * [Usage](#usage)
     * [Frontend Routes](#frontend-routes)
