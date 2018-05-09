@@ -4,6 +4,7 @@
     * [Backend Routes](#backend-routes)
 * [Policies](#policies)
 * [Configuration](#configuration)
+* [Events](#events)
 * [Marking Posts per Site](#marking-posts-per-site)
 
 ## Installation
@@ -103,6 +104,15 @@ php artisan vendor:publish --tag="laravel-blog/config"
 ```
 This will create a local copy of the configuration file for you to edit. That you can modify to suit your needs. The config
 file is commented to assist you in modifying the properties.
+
+## Events
+
+A number of events are provided to allow you to hook your own custom functionality into the Blog process. The events, and their properties are listed below
+
+| Event | Properties |
+| Lnch\LaravelBlog\Events\BlogPostCreated | $post - The post that was created |
+| Lnch\LaravelBlog\Events\BlogPostUpdated | $post - The updated post<br>$oldPost - The post before it was updated |
+| Lnch\LaravelBlog\Events\BlogPostDeleted | $post - The post that was deleted |
 
 ## Marking posts per Site
 
