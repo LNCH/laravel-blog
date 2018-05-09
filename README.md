@@ -110,6 +110,7 @@ file is commented to assist you in modifying the properties.
 A number of events are provided to allow you to hook your own custom functionality into the Blog process. The events, and their properties are listed below
 
 | Event | Properties |
+| --- | --- |
 | Lnch\LaravelBlog\Events\BlogPostCreated | $post - The post that was created |
 | Lnch\LaravelBlog\Events\BlogPostUpdated | $post - The updated post<br>$oldPost - The post before it was updated |
 | Lnch\LaravelBlog\Events\BlogPostDeleted | $post - The post that was deleted |
