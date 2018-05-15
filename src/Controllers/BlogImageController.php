@@ -155,7 +155,7 @@ class BlogImageController extends Controller
     private function uploadFile(UploadedFile $file, $request)
     {
         // Create filename
-        $originalFilename = $file->getClientOriginalName();
+        $originalFilename = str_replace(" ", "_", $file->getClientOriginalName());
 
         $patterns = [
             '@\[date\]@is',
