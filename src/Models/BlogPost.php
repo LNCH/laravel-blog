@@ -239,4 +239,14 @@ class BlogPost extends BlogModel
 
         return $postDate > $date;
     }
+
+    public function isDraft()
+    {
+        return $this->status == self::STATUS_DRAFT;
+    }
+
+    public function isActive()
+    {
+        return $this->status == self::STATUS_ACTIVE;
+    }
 }
