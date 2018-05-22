@@ -78,7 +78,7 @@
 
                 <div class="form-group">
                     @if(isset($post))
-                        <a href="{{ blogUrl("posts/$post->id/$post->slug") }}" target="_blank"
+                        <a href="{{ blogUrl("posts/$post->id/$post->slug", true) }}" target="_blank"
                            class="btn btn-block btn-primary">Preview Post</a>
                     @endif
                     <button class="btn btn-block btn-success">Save Post</button>
