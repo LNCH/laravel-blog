@@ -141,7 +141,12 @@ return [
 
             'image_upload_url'  => 'images/dialog-upload',
 
-        ]
+        ],
+
+        /*
+         * By default all posts, scheduled or current will be shown together.
+         */
+        'separate_scheduled' => false
     ],
 
     /*
