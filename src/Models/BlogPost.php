@@ -148,16 +148,19 @@ class BlogPost extends BlogModel
         $patterns = [
             '/[^a-zA-Z0-9 -]/',
             '/(\s){2,}/',
-            '/\s/'
+            '/\s/',
+            '/-{2,}/',
         ];
 
         $replacements = [
             '',
             ' ',
-            '-'
+            '-',
+            '-',
         ];
 
         $slug = strtolower(preg_replace($patterns, $replacements, $value));
+
         if (strlen($slug) > 50) {
             $slug = substr($slug, 0, 50);
         }
