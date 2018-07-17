@@ -12,6 +12,11 @@ class BlogPostPolicy extends BasePolicy implements BlogPostPolicyInterface
         return true;
     }
 
+    public function view_draft_post($user, BlogPost $post)
+    {
+        return true;
+    }
+
     public function create($user)
     {
         return true;

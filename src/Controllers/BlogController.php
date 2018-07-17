@@ -31,7 +31,19 @@ class BlogController extends Controller
      */
     public function show(BlogPost $post, $slug)
     {
-        // Validate slug & redirect if necessary
+        // Add check for draft posts
+        $user = auth()->user();
+        if($post->status == BlogPost::STATUS_DRAFT) {
+            if(!$user || $user->cannot("view_draft_post", $post)) {
+                return redirect(config("laravel-blog.frontend_route_prefix"));
+            }
+        }
+
+        // Check for correct slug, 301 if not
+        if($post->slug !== $slug) {
+            return redirect(config("laravel-blog.frontend_route_prefix")."/"
+                ."$post->id/$post->slug", 301);
+        }
 
         return view("laravel-blog::".$this->viewPath."frontend.show", [
             'post' => $post

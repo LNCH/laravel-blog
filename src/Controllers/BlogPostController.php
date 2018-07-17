@@ -22,9 +22,15 @@ class BlogPostController extends Controller
         }
 
         $posts = BlogPost::orderBy("is_featured", "desc")
-            ->whereRaw("TIMESTAMP(published_at) < NOW()")
-            ->orderBy("published_at", "desc")
-            ->paginate(config("laravel-blog.posts.per_page"));
+            ->orderBy("published_at", "desc");
+
+        // Separate scheduled if necessary
+        if (config("laravel-blog.posts.separate_scheduled", false) === true)
+        {
+            $posts = $posts->whereRaw("TIMESTAMP(published_at) < NOW()");
+        }
+
+        $posts = $posts->paginate(config("laravel-blog.posts.per_page"));
 
         return view("laravel-blog::".$this->viewPath."posts.index", [
             'posts' => $posts

@@ -26,10 +26,15 @@ class BlogHelper
      *
      * @return Builder
      */
-    private static function getPublishedPosts() {
+    private static function getPublishedPosts()
+    {
+        $currentDate = date("I") == "0"
+            ? date("Y-m-d H:i:s", time() + 3600)
+            : date("Y-m-d H:i:s");
+
         return BlogPost::where('status', BlogPost::STATUS_ACTIVE)
             ->where('site_id', getBlogSiteID())
-            ->where('published_at', '<=', date('Y-m-d H:i:s'));
+            ->where('published_at', '<=', $currentDate);
     }
 
     /**
@@ -107,10 +112,14 @@ class BlogHelper
      */
     public static function categories($count = 5)
     {
+        $currentDate = date("I") == "0"
+            ? date("Y-m-d H:i:s", time() + 3600)
+            : date("Y-m-d H:i:s");
+
         return BlogCategory::whereHas("posts", function($query) {
             $query->where("status", BlogPost::STATUS_ACTIVE)
                 ->where('site_id', getBlogSiteID())
-                ->where('published_at', '<', date('Y-m-d H:i:s'));
+                ->where('published_at', '<', $currentDate);
         })
             ->limit($count)
             ->get();
@@ -125,10 +134,14 @@ class BlogHelper
      */
     public static function tags($count = 20)
     {
+        $currentDate = date("I") == "0"
+            ? date("Y-m-d H:i:s", time() + 3600)
+            : date("Y-m-d H:i:s");
+
         return BlogTag::whereHas("posts", function($query) {
             $query->where("status", BlogPost::STATUS_ACTIVE)
                 ->where('site_id', getBlogSiteID())
-                ->where('published_at', '<', date('Y-m-d H:i:s'));
+                ->where('published_at', '<', $currentDate);
         })
             ->limit($count)
             ->get();
@@ -234,11 +247,15 @@ class BlogHelper
      */
     public static function scheduledPosts()
     {
+        $currentDate = date("I") == "0"
+            ? date("Y-m-d H:i:s", time() + 3600)
+            : date("Y-m-d H:i:s");
+
         $siteId = getBlogSiteID();
 
         return BlogPost::where("status", BlogPost::STATUS_ACTIVE)
             ->where('site_id', $siteId)
-            ->where('published_at', '>', date('Y-m-d H:i:s'))
+            ->where('published_at', '>', $currentDate)
             ->get();
     }
 
