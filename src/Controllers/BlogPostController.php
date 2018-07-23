@@ -32,7 +32,7 @@ class BlogPostController extends Controller
 
         $posts = $posts->paginate(config("laravel-blog.posts.per_page"));
 
-        return view("laravel-blog::".$this->viewPath."posts.index", [
+        return view($this->viewPath."posts.index", [
             'posts' => $posts
         ]);
     }
@@ -52,7 +52,7 @@ class BlogPostController extends Controller
             ->orderBy("published_at", "asc")
             ->paginate(15);
 
-        return view("laravel-blog::".$this->viewPath."posts.index", [
+        return view($this->viewPath."posts.index", [
             'posts' => $posts
         ]);
     }
@@ -68,7 +68,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."posts.editor");
+        return view($this->viewPath."posts.editor");
     }
 
     /**
@@ -154,7 +154,7 @@ class BlogPostController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."posts.editor", [
+        return view($this->viewPath."posts.editor", [
             'post' => $post
         ]);
     }

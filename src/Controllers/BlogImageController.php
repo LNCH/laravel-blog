@@ -32,7 +32,7 @@ class BlogImageController extends Controller
 
         $images = BlogImage::paginate(config("laravel-blog.images.per_page"));
 
-        return view("laravel-blog::".$this->viewPath."images.index", [
+        return view($this->viewPath."images.index", [
             'images' => $images
         ]);
     }
@@ -48,7 +48,7 @@ class BlogImageController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."images.create");
+        return view($this->viewPath."images.create");
     }
 
     /**
@@ -97,7 +97,7 @@ class BlogImageController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."images.edit", [
+        return view($this->viewPath."images.edit", [
             'image' => $image
         ]);
     }

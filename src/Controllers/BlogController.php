@@ -17,7 +17,7 @@ class BlogController extends Controller
     {
         $posts = BlogHelper::posts();
 
-        return view("laravel-blog::".$this->viewPath."frontend.index", [
+        return view($this->viewPath."frontend.index", [
             'posts' => $posts
         ]);
     }
@@ -45,7 +45,7 @@ class BlogController extends Controller
                 ."$post->id/$post->slug", 301);
         }
 
-        return view("laravel-blog::".$this->viewPath."frontend.show", [
+        return view($this->viewPath."frontend.show", [
             'post' => $post
         ]);
     }
