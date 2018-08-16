@@ -211,7 +211,7 @@ class BlogPostController extends Controller
         if($request->tags) {
             $tags = array_merge($tags, explode(",", $request->tags));
         }
-        if(count($request->tag)) {
+        if($request->tag && count($request->tag)) {
             $tags = array_merge($tags, $request->tag);
         }
         $post->syncTags($tags);
