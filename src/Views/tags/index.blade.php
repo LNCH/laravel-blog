@@ -11,7 +11,7 @@
         @include("laravel-blog::actions")
 
         <div class="col-sm-3">
-            @include("laravel-blog::form")
+            @include("laravel-blog::tags.form")
         </div> <!-- End .col-sm-3 -->
 
         <div class="col-sm-9">
