@@ -208,7 +208,7 @@ class BlogHelper
      * @param int $count
      * @return mixed
      */
-    public static function postsByArchive($year, $month, $count = 15)
+    public static function postsByArchive($year, $month = null, $count = 15)
     {
         $posts = BlogPost::where("status", BlogPost::STATUS_ACTIVE)
             ->where('site_id', getBlogSiteID())
