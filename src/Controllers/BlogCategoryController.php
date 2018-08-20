@@ -29,7 +29,7 @@ class BlogCategoryController extends Controller
 
         $categories = BlogCategory::paginate(config("laravel-blog.categories.per_page"));
 
-        return view("laravel-blog::".$this->viewPath."categories.index", [
+        return view($this->viewPath."categories.index", [
             'categories' => $categories
         ]);
     }
@@ -45,7 +45,7 @@ class BlogCategoryController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."categories.create");
+        return view($this->viewPath."categories.create");
     }
 
     /**
@@ -95,7 +95,7 @@ class BlogCategoryController extends Controller
             abort(403);
         }
 
-        return view("laravel-blog::".$this->viewPath."categories.edit", compact("category"));
+        return view($this->viewPath."categories.edit", compact("category"));
     }
 
     /**

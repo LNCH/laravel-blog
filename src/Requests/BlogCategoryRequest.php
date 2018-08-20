@@ -24,7 +24,7 @@ class BlogCategoryRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'description' => 'sometimes|string'
+            'description' => 'sometimes|string|nullable'
         ];
 
         $siteId = getBlogSiteID();

@@ -29,7 +29,7 @@ class BlogTagController extends Controller
 
         $tags = BlogTag::paginate(config("laravel-blog.tags.per_page"));
 
-        return view("laravel-blog::".$this->viewPath."tags.index", [
+        return view($this->viewPath."tags.index", [
             'tags' => $tags
         ]);
     }
@@ -68,7 +68,7 @@ class BlogTagController extends Controller
 
         $tags = BlogTag::paginate(config("laravel-blog.tags.per_page"));
 
-        return view("laravel-blog::".$this->viewPath."tags.index", [
+        return view($this->viewPath."tags.index", [
             'tags' => $tags,
             'tag' => $tag
         ]);

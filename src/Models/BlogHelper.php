@@ -2,6 +2,7 @@
 
 namespace Lnch\LaravelBlog\Models;
 
+use DB;
 use Illuminate\Support\Facades\Request;
 
 class BlogHelper
@@ -116,7 +117,7 @@ class BlogHelper
             ? date("Y-m-d H:i:s", time() + 3600)
             : date("Y-m-d H:i:s");
 
-        return BlogCategory::whereHas("posts", function($query) {
+        return BlogCategory::whereHas("posts", function($query) use ($currentDate) {
             $query->where("status", BlogPost::STATUS_ACTIVE)
                 ->where('site_id', getBlogSiteID())
                 ->where('published_at', '<', $currentDate);
@@ -207,7 +208,7 @@ class BlogHelper
      * @param int $count
      * @return mixed
      */
-    public static function postsByArchive($year, $month, $count = 15)
+    public static function postsByArchive($year, $month = null, $count = 15)
     {
         $posts = BlogPost::where("status", BlogPost::STATUS_ACTIVE)
             ->where('site_id', getBlogSiteID())
