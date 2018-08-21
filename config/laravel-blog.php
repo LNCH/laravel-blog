@@ -137,7 +137,7 @@ return [
              * Route for the custom file browser. Relative to your 'route_prefix' defined
              * above
              */
-            'file_browser_url'  => 'images?embed=true',
+            'file_browser_url'  => 'images?laravel-blog-embed=true',
 
             'image_upload_url'  => 'images/dialog-upload',
 

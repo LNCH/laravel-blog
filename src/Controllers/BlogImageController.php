@@ -130,6 +130,7 @@ class BlogImageController extends Controller
      *
      * @param BlogImage $image
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      * @internal param int $id
      */
     public function destroy(BlogImage $image)
@@ -148,9 +149,10 @@ class BlogImageController extends Controller
     /**
      * Uploads a file to the server and creates a DB entry.
      *
-     * @param UploadedFile $file
-     * @param BlogImageRequest      $request
+     * @param UploadedFile     $file
+     * @param BlogImageRequest $request
      * @return string
+     * @throws \Exception
      */
     private function uploadFile(UploadedFile $file, $request)
     {
@@ -210,6 +212,7 @@ class BlogImageController extends Controller
      *
      * @param Request $request
      * @return string
+     * @throws \Exception
      */
     public function dialogUpload(Request $request)
     {
@@ -231,6 +234,7 @@ class BlogImageController extends Controller
      *
      * @param $new_filename
      * @return string
+     * @throws \Exception
      */
     private function useFile($new_filename)
     {

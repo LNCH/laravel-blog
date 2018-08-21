@@ -10,7 +10,7 @@
 
     <body>
 
-        @if(!Request::get("embed", false))
+        @if(!Request::get("laravel-blog-embed", false))
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="row">
