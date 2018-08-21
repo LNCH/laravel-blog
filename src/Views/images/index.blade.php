@@ -10,11 +10,11 @@
 
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">
             @if(Request::get("embed", false) && Request::get("featured", false))
-                <a href="{{ blogUrl("images/create?embed=true&featured=true") }}" class="btn btn-primary btn-sm">
+                <a href="{{ blogUrl("images/create?laravel-blog-embed=true&laravel-blog-featured=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
             @elseif(Request::get("embed", false))
-                <a href="{{ blogUrl("images/create?embed=true") }}" class="btn btn-primary btn-sm">
+                <a href="{{ blogUrl("images/create?laravel-blog-embed=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
             @else
