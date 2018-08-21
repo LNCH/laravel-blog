@@ -106,8 +106,8 @@
 
             @if($images)
                 <div class="text-right">
-                    {{ $images->appends(['embed' => Request::get("embed", false) ? "true" : "",
-                        'featured' => Request::get("featured", false) ? "true" : ""])->links() }}
+                    {{ $images->appends(['embed' => Request::get("laravel-blog-embed", false) ? "true" : "",
+                        'featured' => Request::get("laravel-blog-featured", false) ? "true" : ""])->links() }}
                 </div>
             @endif
         </div>
