@@ -13,10 +13,10 @@
             <form action="{{ blogUrl("images") }}" method="post" id="image-upload-form" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
-                @if(Request::input("embed", false))
+                @if(Request::input("laravel-blog-embed", false))
                     <input type="hidden" name="embed" value="true" />
                 @endif
-                @if(Request::input("featured", false))
+                @if(Request::input("laravel-blog-featured", false))
                     <input type="hidden" name="featured" value="true" />
                 @endif
 
