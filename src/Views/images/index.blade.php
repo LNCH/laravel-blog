@@ -9,11 +9,11 @@
         </div> <!-- End .col-sm-6 -->
 
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">
-            @if(Request::get("embed", false) && Request::get("featured", false))
+            @if(Request::get("laravel-blog-embed", false) && Request::get("laravel-blog-featured", false))
                 <a href="{{ blogUrl("images/create?laravel-blog-embed=true&laravel-blog-featured=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
-            @elseif(Request::get("embed", false))
+            @elseif(Request::get("laravel-blog-embed", false))
                 <a href="{{ blogUrl("images/create?laravel-blog-embed=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
