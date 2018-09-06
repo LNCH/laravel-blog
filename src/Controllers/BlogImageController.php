@@ -76,7 +76,7 @@ class BlogImageController extends Controller
             $returnUrl .= "?laravel-blog-embed=true&laravel-blog-featured=true";
         } else if ($request->get("laravel-blog-embed", false)) {
             $returnUrl .= "?laravel-blog-embed=true";
-        } else if ($request->featured) {
+        } else if ($request->get("laravel-blog-featured", false)) {
             $returnUrl .= "?laravel-blog-featured=true";
         }
 
