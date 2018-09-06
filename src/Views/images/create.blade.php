@@ -14,10 +14,10 @@
                 {{ csrf_field() }}
 
                 @if(Request::input("laravel-blog-embed", false))
-                    <input type="hidden" name="embed" value="true" />
+                    <input type="hidden" name="laravel-blog-embed" value="true" />
                 @endif
                 @if(Request::input("laravel-blog-featured", false))
-                    <input type="hidden" name="featured" value="true" />
+                    <input type="hidden" name="laravel-blog-featured" value="true" />
                 @endif
 
                 <div class="row">
