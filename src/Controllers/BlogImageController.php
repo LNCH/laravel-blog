@@ -72,17 +72,17 @@ class BlogImageController extends Controller
         }
 
         $returnUrl = blogUrl("images");
-        if($request->embed && $request->featured) {
-            $returnUrl .= "?embed=true&featured=true";
-        } else if ($request->embed) {
-            $returnUrl .= "?embed=true";
+        if($request->get("laravel-blog-embed", false) && $request->get("laravel-blog-featured", false)) {
+            $returnUrl .= "?laravel-blog-embed=true&laravel-blog-featured=true";
+        } else if ($request->get("laravel-blog-embed", false)) {
+            $returnUrl .= "?laravel-blog-embed=true";
         } else if ($request->featured) {
-            $returnUrl .= "?featured=true";
+            $returnUrl .= "?laravel-blog-featured=true";
         }
 
         // Return
         return redirect($returnUrl)
-            ->with("success", (!$request->embed) ? "Images uploaded successfully!" : '');
+            ->with("success", (!$request->get("laravel-blog-embed", false)) ? "Images uploaded successfully!" : '');
     }
 
     /**
