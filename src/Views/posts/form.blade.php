@@ -1,4 +1,4 @@
-<form action="{{ isset($post) ? blogUrl("posts/$post->id") : blogUrl("posts") }}" method="post">
+<form action="{{ isset($post) ? blogUrl("posts/$post->id") : blogUrl("posts") }}" method="post" class="row">
     {{ csrf_field() }} {{ method_field(isset($post) ? "PATCH" : "POST") }}
 
     @if(isset($post))
