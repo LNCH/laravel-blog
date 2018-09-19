@@ -10,6 +10,15 @@ use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
 class BlogPostController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (config("laravel-blog.user_auth_middleware", false)) {
+            $this->middleware("auth");
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *

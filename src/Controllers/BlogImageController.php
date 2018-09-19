@@ -14,6 +14,10 @@ class BlogImageController extends Controller
     {
         parent::__construct();
 
+        if (config("laravel-blog.user_auth_middleware", false)) {
+            $this->middleware("auth");
+        }
+
         if (!config("laravel-blog.images.enabled")) {
             abort(404);
         }
