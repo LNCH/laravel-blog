@@ -11,7 +11,7 @@ class BlogCategoryController extends Controller
     {
         parent::__construct();
 
-        if (config("laravel-blog.user_auth_middleware", false)) {
+        if (config("laravel-blog.use_auth_middleware", false)) {
             $this->middleware("auth");
         }
 
