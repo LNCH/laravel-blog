@@ -183,7 +183,7 @@ class BlogPost extends BlogModel
             $content .= "...";
         }
 
-        return html_entity_decode(trim($content));
+        return html_entity_decode(trim($content), ENT_COMPAT | ENT_HTML401 | ENT_QUOTES);
     }
 
     /**
