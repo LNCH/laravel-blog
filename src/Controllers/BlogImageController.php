@@ -161,7 +161,7 @@ class BlogImageController extends Controller
     private function uploadFile(UploadedFile $file, $request)
     {
         // Create filename
-        $originalFilename = str_replace(" ", "_", $file->getClientOriginalName());
+        $originalFilename = $file->getClientOriginalName();
 
         $patterns = [
             '@\[date\]@is',
@@ -172,7 +172,7 @@ class BlogImageController extends Controller
         $matches = [
             date("Ymd"),
             date("Ymd-His"),
-            $originalFilename,
+            str_replace(" ", "_", $originalFilename),
         ];
 
         $filenamePattern = config("laravel-blog.images.filename_format", "[datetime]_[filename]");
