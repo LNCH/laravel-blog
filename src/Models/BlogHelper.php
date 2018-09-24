@@ -77,17 +77,20 @@ class BlogHelper
      * featured, retrieves a collection of recent posts.
      *
      * @param int $count
+     * @param bool $featuredOnly (optional - default: FALSE)
      * @return mixed
      */
-    public static function featuredPosts($count = 3)
+    public static function featuredPosts($count = 3, $featuredOnly = false)
     {
         $featured = self::getPublishedPosts()
             ->orderBy('is_featured', 'desc')
-            ->orderBy("published_at", "desc")
-            ->limit($count)
-            ->get();
+            ->orderBy("published_at", "desc");
 
-        return $featured;
+        if($featuredOnly) {
+            $featured = $featured->where('is_featured', true);
+        }
+
+        return $featured->limit($count)->get();
     }
 
     /**
