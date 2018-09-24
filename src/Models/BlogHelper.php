@@ -41,17 +41,23 @@ class BlogHelper
     /**
      * Returns a paginated collection of blog posts.
      *
-     * @param $count
+     * @param $count (optional)
+     * @param bool $excludeFeatured (optional - default: FALSE)
      * @return mixed
      */
-    public static function posts($count = null)
+    public static function posts($count = null, $excludeFeatured = false)
     {
         if (!$count) {
             $count = config("laravel-blog.frontend.posts_per_page");
         }
 
-        return self::getPublishedPosts()
-            ->orderBy("published_at", "desc")
+        $query = self::getPublishedPosts();
+
+        if ($excludeFeatured) {
+            $query->where('is_featured', false);
+        }
+
+        return $query->orderBy("published_at", "desc")
             ->paginate($count);
     }
 
