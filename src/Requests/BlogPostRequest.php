@@ -26,7 +26,7 @@ class BlogPostRequest extends FormRequest
     {
         $rules = [];
 
-        array_merge($rules, [
+        $rules = array_merge($rules, [
             'title'             => 'required|string',
             'blog_image_id'     => 'sometimes|integer',
             'content'           => 'required',
