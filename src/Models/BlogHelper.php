@@ -41,17 +41,23 @@ class BlogHelper
     /**
      * Returns a paginated collection of blog posts.
      *
-     * @param $count
+     * @param $count (optional)
+     * @param bool $excludeFeatured (optional - default: FALSE)
      * @return mixed
      */
-    public static function posts($count = null)
+    public static function posts($count = null, $excludeFeatured = false)
     {
         if (!$count) {
             $count = config("laravel-blog.frontend.posts_per_page");
         }
 
-        return self::getPublishedPosts()
-            ->orderBy("published_at", "desc")
+        $query = self::getPublishedPosts();
+
+        if ($excludeFeatured) {
+            $query->where('is_featured', false);
+        }
+
+        return $query->orderBy("published_at", "desc")
             ->paginate($count);
     }
 
@@ -70,18 +76,21 @@ class BlogHelper
      * Retrieves a collection of featured posts. If no posts are
      * featured, retrieves a collection of recent posts.
      *
-     * @param int $count
+            * @param int $count
+    * @param bool $featuredOnly (optional - default: FALSE)
      * @return mixed
-     */
-    public static function featuredPosts($count = 3)
+        */
+    public static function featuredPosts($count = 3, $featuredOnly = false)
     {
         $featured = self::getPublishedPosts()
             ->orderBy('is_featured', 'desc')
-            ->orderBy("published_at", "desc")
-            ->limit($count)
-            ->get();
+            ->orderBy("published_at", "desc");
 
-        return $featured;
+        if($featuredOnly) {
+            $featured = $featured->where('is_featured', true);
+        }
+
+        return $featured->limit($count)->get();
     }
 
     /**
@@ -204,11 +213,24 @@ class BlogHelper
      * and, optionally, month.
      *
      * @param     $year
-     * @param     $month
-     * @param int $count
+     * @param     $month (default - null)
+     * @param     $count (default - 15)
      * @return mixed
      */
     public static function postsByArchive($year, $month = null, $count = 15)
+    {
+        return self::postsByArchiveWithoutPagination($year, $month)->paginate($count);
+    }
+
+    /**
+     * Returns a collection of posts that were published in a defined year
+     * and, optionally, month.
+     *
+     * @param     $year
+     * @param     $month
+     * @return mixed
+     */
+    public static function postsByArchiveWithoutPagination($year, $month = null)
     {
         $posts = BlogPost::where("status", BlogPost::STATUS_ACTIVE)
             ->where('site_id', getBlogSiteID())
@@ -218,8 +240,7 @@ class BlogHelper
             $posts = $posts->whereRaw("MONTH(published_at) = $month");
         }
 
-        $posts = $posts->orderBy("published_at", "desc")
-            ->paginate($count);
+        $posts = $posts->orderBy("published_at", "desc");
 
         return $posts;
     }
