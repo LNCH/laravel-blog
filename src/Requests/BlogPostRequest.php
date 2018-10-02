@@ -29,9 +29,9 @@ class BlogPostRequest extends FormRequest
         $statuses = implode(",", array_keys(BlogPost::statuses()));
 
         $rules = array_merge($rules, [
-            'title'             => 'required|string',
+            'title'             => 'required|string|max:190',
             'blog_image_id'     => 'nullable|integer',
-            'post_content'      => 'required',
+            'post_content'      => 'required|max:4294967295',
             'status'            => 'required|in:'.$statuses,
             'format'            => 'sometimes',
             'published_at'      => 'nullable|date',
