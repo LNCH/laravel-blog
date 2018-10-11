@@ -77,7 +77,7 @@
                 <hr>
 
                 <div class="form-group">
-                    @if(isset($post))
+                    @if(isset($post) && config("laravel-blog.allow_post_previewing", true))
                         <a href="{{ blogUrl("$post->id/$post->slug", true) }}" target="_blank"
                            class="btn btn-block btn-primary">Preview Post</a>
                     @endif
