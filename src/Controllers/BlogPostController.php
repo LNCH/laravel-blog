@@ -147,7 +147,13 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $post)
     {
-        //
+        if(auth()->user()->cannot("view", $post)) {
+            abort(403);
+        }
+
+        return view($this->viewPath."posts.show", [
+            'post' => $post
+        ]);
     }
 
     /**
