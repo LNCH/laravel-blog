@@ -203,3 +203,9 @@
 .post-content {
     flex: 0 0 100%;
 }
+
+.lnch-blog_post-comment {
+  padding: 1rem;
+  border: 1px solid grey;
+  margin-bottom: 1rem;
+}
