@@ -35,6 +35,11 @@
 
             </article>
 
+            @if(config("laravel-blog.comments.enabled"))
+                @include("laravel-blog::frontend.partials.comments", ['post' => $post])
+                @include("laravel-blog::frontend.partials.comments-form", ['post' => $post])
+            @endif
+
         </div>
     </div>
 

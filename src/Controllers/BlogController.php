@@ -2,8 +2,10 @@
 
 namespace Lnch\LaravelBlog\Controllers;
 
+use Illuminate\Http\Request;
 use Lnch\LaravelBlog\Models\BlogHelper;
 use Lnch\LaravelBlog\Models\BlogPost;
+use Lnch\LaravelBlog\Models\Comment;
 use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
 class BlogController extends Controller
@@ -48,5 +50,25 @@ class BlogController extends Controller
         return view($this->viewPath."frontend.show", [
             'post' => $post
         ]);
+    }
+
+    public function postComment(BlogPost $post, Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'sometimes|string|max:200',
+            'email' => 'sometimes|email|max:150',
+            'comment' => 'required|string|max:65000',
+        ]);
+
+        $comment = $post->comments()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'user_id' => auth()->id(),
+            'body' => $request->comment,
+            'status' => config("laravel-blog.comments.requires_approval")
+                ? Comment::STATUS_PENDING_APPROVAL : Comment::STATUS_APPROVED,
+        ]);
+
+        return redirect(blogUrl("$post->id/$post->slug", true));
     }
 }

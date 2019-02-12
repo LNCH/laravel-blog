@@ -4,6 +4,7 @@ Route::group(['prefix' => config("laravel-blog.frontend_route_prefix"), 'middlew
 
     Route::get("/", "Lnch\LaravelBlog\Controllers\BlogController@index");
     Route::get("/{post}/{slug?}", "Lnch\LaravelBlog\Controllers\BlogController@show")->where('post', '[0-9]+');
+    Route::post("/{post}/comments", "Lnch\LaravelBlog\Controllers\BlogController@postComment");
 
 });
 
@@ -39,13 +40,19 @@ Route::group(['prefix' => config("laravel-blog.route_prefix"), 'middleware' => '
     {
         Route::post(config("laravel-blog.images.taxonomy")."/dialog-upload",
             "Lnch\LaravelBlog\Controllers\BlogImageController@dialogUpload");
-        
+
         Route::resource(config("laravel-blog.images.taxonomy"),
             "Lnch\LaravelBlog\Controllers\BlogImageController",
             [
                 'except' => ['show']
             ]
         );
+    }
+
+    if (config("laravel-blog.comments.enabled"))
+    {
+        Route::resource(config("laravel-blog.comments.taxonomy"),
+            "Lnch\LaravelBlog\Controllers\BlogCommentController");
     }
 
 });

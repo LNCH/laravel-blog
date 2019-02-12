@@ -279,6 +279,45 @@ return [
          */
         'max_upload_size'   => 10000
 
-    ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comment Admin Options
+    |--------------------------------------------------------------------------
+    |
+    | All config options related to the blog comments.
+    |
+    */
+
+    'comments' => [
+
+        /*
+         * Defines whether or not the feature is enabled on the site or not.
+         */
+        'enabled'           => true,
+
+        /*
+         * The taxonomy will be used in the routes file to define the route.
+         */
+        'taxonomy'          => 'comments',
+
+        /*
+         * How many records should be shown on the index page.
+         */
+        'per_page'          => 15,
+
+        /*
+         * Defines if comments require approval before being displayed on the frontend version of a blog post.
+         */
+        'requires_approval' => true,
+
+        /*
+         * Defines whether non-authenticated users (guests) are allowed to comment on blog posts. They will be
+         * asked for a name and email to post a comment.
+         */
+        'allow_guests' => true,
+
+    ],
 
 ];
