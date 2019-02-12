@@ -66,13 +66,13 @@
                     </label>
                 </div>
 
-                {{--<div class="form-group">--}}
-                    {{--<label for="post_comments" class="control-label">Comments</label>--}}
-                    {{--<select name="comments_enabled" id="post_comments" class="form-control">--}}
-                        {{--<option value="0" @if(isset($post) && $post->comments_enabled == 0) selected @endif>Disabled</option>--}}
-                        {{--<option value="1" @if(isset($post) && $post->comments_enabled == 1) selected @endif>Enabled</option>--}}
-                    {{--</select>--}}
-                {{--</div>--}}
+                <div class="form-group">
+                    <label for="post_comments" class="control-label">Comments</label>
+                    <select name="comments_enabled" id="post_comments" class="form-control">
+                        <option value="0" @if(isset($post) && $post->comments_enabled == 0) selected @endif>Disabled</option>
+                        <option value="1" @if(isset($post) && $post->comments_enabled == 1) selected @endif>Enabled</option>
+                    </select>
+                </div>
 
                 <hr>
 

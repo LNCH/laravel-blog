@@ -35,8 +35,8 @@ class BlogPostRequest extends FormRequest
             'status'            => 'required|in:'.$statuses,
             'format'            => 'sometimes',
             'published_at'      => 'nullable|date',
-//            'comments_enabled'  => 'required|boolean',
-            'tags'              => 'sometimes|string',
+            'comments_enabled'  => 'required|boolean',
+            'tags'              => 'sometimes|string|nullable',
             'is_featured'       => 'sometimes|boolean',
         ]);
 
