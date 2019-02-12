@@ -60,7 +60,7 @@ class BlogController extends Controller
             'comment' => 'required|string|max:65000',
         ]);
 
-        $comment = $post->comments()->create([
+        $post->comments()->create([
             'name' => $request->name,
             'email' => $request->email,
             'user_id' => auth()->id(),
