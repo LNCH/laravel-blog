@@ -1,4 +1,4 @@
-<aside class="post-commments">
+<aside class="post-commments" id="comments-form">
     @if(!$post->comments_enabled)
         <p>Comments have been disabled for this post</p>
     @elseif(!config("laravel-blog.comments.allow_guests") && !Auth::check())

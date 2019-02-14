@@ -5,11 +5,13 @@
                 <div class="comment-meta">
                     Posted by
                     <span class="user">
-                @if($comment->user) {{ $comment->user->name }} @else {{ $comment->name }} @endif
-            </span>
+                        @if($comment->user) {{ $comment->user->name }} @else {{ $comment->name }} @endif
+                    </span>
                     on
                     <span class="date">{{ $comment->created_at->format("jS F, Y") }} </span>
                     at <span class="time">{{ $comment->created_at->format("h:ia") }}</span>
+
+                    <a href="?reply={{ $comment->id }}#comments-form" class="reply-link">Reply</a>
                 </div>
 
                 {{ $comment->body }}
