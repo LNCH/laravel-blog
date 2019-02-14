@@ -1,4 +1,4 @@
-<ul class="lnch-blog_comments">
+<ul class="lnch-blog_comments" id="post-comments">
     @foreach($post->comments as $comment)
         <li>
             <div class="lnch-blog_post-comment">

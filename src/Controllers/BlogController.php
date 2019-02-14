@@ -69,6 +69,6 @@ class BlogController extends Controller
                 ? Comment::STATUS_PENDING_APPROVAL : Comment::STATUS_APPROVED,
         ]);
 
-        return redirect(blogUrl("$post->id/$post->slug", true));
+        return redirect(blogUrl("$post->id/$post->slug" . "#post-comments", true));
     }
 }
