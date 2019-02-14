@@ -59,4 +59,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class, "moderated_by");
     }
+
+    public function replies()
+    {
+        return $this->hasMany(self::class, "parent_id", "id");
+    }
 }

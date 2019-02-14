@@ -90,6 +90,7 @@ class BlogPost extends BlogModel
     {
         return config("laravel-blog.comments.enabled")
             ? $this->hasMany(Comment::class, "post_id", "id")
+                ->where("parent_id", null)
                 ->orderby("created_at", "desc")
             : [];
     }
