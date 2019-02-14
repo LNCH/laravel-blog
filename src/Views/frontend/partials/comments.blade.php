@@ -1,4 +1,8 @@
-<ul class="lnch-blog_comments" id="post-comments">
+<span id="post-comments"></span>
+
+<h2>{{ $title or "Comments" }}</h2>
+
+<ul class="lnch-blog_comments">
     @foreach($post->comments as $comment)
         <li>
             <div class="lnch-blog_post-comment">
