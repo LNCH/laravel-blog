@@ -10,7 +10,7 @@
     "licence": "MIT",
     "minimum-stability": "dev",
     "require": {
-        "doctrine/dbal": "^2.7"
+        "doctrine/dbal": "^2.5"
     },
     "autoload": {
         "psr-4": {
