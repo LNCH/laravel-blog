@@ -9,12 +9,12 @@
         </div> <!-- End .col-sm-6 -->
 
         <div class="col-sm-6 text-right" style="padding-top: 1.5rem;">
-            @if(Request::get("embed", false) && Request::get("featured", false))
-                <a href="{{ blogUrl("images/create?embed=true&featured=true") }}" class="btn btn-primary btn-sm">
+            @if(Request::get("laravel-blog-embed", false) && Request::get("laravel-blog-featured", false))
+                <a href="{{ blogUrl("images/create?laravel-blog-embed=true&laravel-blog-featured=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
-            @elseif(Request::get("embed", false))
-                <a href="{{ blogUrl("images/create?embed=true") }}" class="btn btn-primary btn-sm">
+            @elseif(Request::get("laravel-blog-embed", false))
+                <a href="{{ blogUrl("images/create?laravel-blog-embed=true") }}" class="btn btn-primary btn-sm">
                     Upload Images
                 </a>
             @else
@@ -35,7 +35,7 @@
                 @forelse($images as $image)
                     <div class="image">
 
-                        @if(Request::get("embed", false))
+                        @if(Request::get("laravel-blog-embed", false))
                             <a href="{{ $image->getUrl() }}" target="_blank" class="ck-select-image"
                                data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
                                 <img src="{{ $image->getUrl() }}" alt="">
@@ -46,14 +46,14 @@
                             </a>
                         @endif
 
-                        @if(Request::get("featured", false))
+                        @if(Request::get("laravel-blog-featured", false))
                             <div class="actions text-center">
                                 <button class="btn btn-xs btn-primary select-featured" data-id="{{ $image->id }}"
                                     data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
                                     Select
                                 </button>
                             </div> <!-- End .actions.text-center -->
-                        @elseif(Request::get("embed", false))
+                        @elseif(Request::get("laravel-blog-embed", false))
                             <div class="actions text-center">
                                 <button class="btn btn-xs btn-primary ck-select-image" data-id="{{ $image->id }}"
                                         data-url="{{ $image->getUrl() }}" data-alt-text="{{ $image->alt_text }}">
@@ -106,8 +106,10 @@
 
             @if($images)
                 <div class="text-right">
-                    {{ $images->appends(['embed' => Request::get("embed", false) ? "true" : "",
-                        'featured' => Request::get("featured", false) ? "true" : ""])->links() }}
+                    {{ $images->appends([
+                        'laravel-blog-embed' => Request::get("laravel-blog-embed", false) ? "true" : "",
+                        'laravel-blog-featured' => Request::get("laravel-blog-featured", false) ? "true" : ""
+                    ])->links() }}
                 </div>
             @endif
         </div>

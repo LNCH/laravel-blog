@@ -82,6 +82,20 @@ class BlogPost extends BlogModel
     }
 
     /**
+     * Retrieves all comments associated with this post.
+     *
+     * @return array|\Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return config("laravel-blog.comments.enabled")
+            ? $this->hasMany(Comment::class, "post_id", "id")
+                ->where("parent_id", null)
+                ->orderby("created_at", "desc")
+            : [];
+    }
+
+    /**
      * Returns an array of available statuses a BlogPost can be in.
      *
      * @return array
@@ -183,7 +197,7 @@ class BlogPost extends BlogModel
             $content .= "...";
         }
 
-        return trim($content);
+        return html_entity_decode(trim($content), ENT_COMPAT | ENT_HTML401 | ENT_QUOTES);
     }
 
     /**

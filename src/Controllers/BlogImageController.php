@@ -14,6 +14,10 @@ class BlogImageController extends Controller
     {
         parent::__construct();
 
+        if (config("laravel-blog.use_auth_middleware", false)) {
+            $this->middleware("auth");
+        }
+
         if (!config("laravel-blog.images.enabled")) {
             abort(404);
         }
@@ -72,17 +76,17 @@ class BlogImageController extends Controller
         }
 
         $returnUrl = blogUrl("images");
-        if($request->embed && $request->featured) {
-            $returnUrl .= "?embed=true&featured=true";
-        } else if ($request->embed) {
-            $returnUrl .= "?embed=true";
-        } else if ($request->featured) {
-            $returnUrl .= "?featured=true";
+        if($request->get("laravel-blog-embed", false) && $request->get("laravel-blog-featured", false)) {
+            $returnUrl .= "?laravel-blog-embed=true&laravel-blog-featured=true";
+        } else if ($request->get("laravel-blog-embed", false)) {
+            $returnUrl .= "?laravel-blog-embed=true";
+        } else if ($request->get("laravel-blog-featured", false)) {
+            $returnUrl .= "?laravel-blog-featured=true";
         }
 
         // Return
         return redirect($returnUrl)
-            ->with("success", (!$request->embed) ? "Images uploaded successfully!" : '');
+            ->with("success", (!$request->get("laravel-blog-embed", false)) ? "Images uploaded successfully!" : '');
     }
 
     /**
@@ -130,6 +134,7 @@ class BlogImageController extends Controller
      *
      * @param BlogImage $image
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      * @internal param int $id
      */
     public function destroy(BlogImage $image)
@@ -148,14 +153,15 @@ class BlogImageController extends Controller
     /**
      * Uploads a file to the server and creates a DB entry.
      *
-     * @param UploadedFile $file
-     * @param BlogImageRequest      $request
+     * @param UploadedFile     $file
+     * @param BlogImageRequest $request
      * @return string
+     * @throws \Exception
      */
     private function uploadFile(UploadedFile $file, $request)
     {
         // Create filename
-        $originalFilename = str_replace(" ", "_", $file->getClientOriginalName());
+        $originalFilename = $file->getClientOriginalName();
 
         $patterns = [
             '@\[date\]@is',
@@ -166,7 +172,7 @@ class BlogImageController extends Controller
         $matches = [
             date("Ymd"),
             date("Ymd-His"),
-            $originalFilename,
+            str_replace(" ", "_", $originalFilename),
         ];
 
         $filenamePattern = config("laravel-blog.images.filename_format", "[datetime]_[filename]");
@@ -210,6 +216,7 @@ class BlogImageController extends Controller
      *
      * @param Request $request
      * @return string
+     * @throws \Exception
      */
     public function dialogUpload(Request $request)
     {
@@ -231,6 +238,7 @@ class BlogImageController extends Controller
      *
      * @param $new_filename
      * @return string
+     * @throws \Exception
      */
     private function useFile($new_filename)
     {

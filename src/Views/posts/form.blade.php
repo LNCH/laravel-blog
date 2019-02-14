@@ -1,4 +1,4 @@
-<form action="{{ isset($post) ? blogUrl("posts/$post->id") : blogUrl("posts") }}" method="post">
+<form action="{{ isset($post) ? blogUrl("posts/$post->id") : blogUrl("posts") }}" method="post" class="row">
     {{ csrf_field() }} {{ method_field(isset($post) ? "PATCH" : "POST") }}
 
     @if(isset($post))
@@ -66,18 +66,18 @@
                     </label>
                 </div>
 
-                {{--<div class="form-group">--}}
-                    {{--<label for="post_comments" class="control-label">Comments</label>--}}
-                    {{--<select name="comments_enabled" id="post_comments" class="form-control">--}}
-                        {{--<option value="0" @if(isset($post) && $post->comments_enabled == 0) selected @endif>Disabled</option>--}}
-                        {{--<option value="1" @if(isset($post) && $post->comments_enabled == 1) selected @endif>Enabled</option>--}}
-                    {{--</select>--}}
-                {{--</div>--}}
+                <div class="form-group">
+                    <label for="post_comments" class="control-label">Comments</label>
+                    <select name="comments_enabled" id="post_comments" class="form-control">
+                        <option value="0" @if(isset($post) && $post->comments_enabled == 0) selected @endif>Disabled</option>
+                        <option value="1" @if(isset($post) && $post->comments_enabled == 1) selected @endif>Enabled</option>
+                    </select>
+                </div>
 
                 <hr>
 
                 <div class="form-group">
-                    @if(isset($post))
+                    @if(isset($post) && config("laravel-blog.allow_post_previewing", true))
                         <a href="{{ blogUrl("$post->id/$post->slug", true) }}" target="_blank"
                            class="btn btn-block btn-primary">Preview Post</a>
                     @endif
@@ -171,7 +171,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <iframe src="{{ blogUrl("images?embed=true&featured=true") }}" frameborder="0"
+                <iframe src="{{ blogUrl("images?laravel-blog-embed=true&laravel-blog-featured=true") }}" frameborder="0"
                         style="width: 100%; height: 500px;"></iframe>
             </div>
             <div class="modal-footer">

@@ -7,11 +7,11 @@
         <div class="col-sm-12">
             <h3>{{ isset($post) ? 'Edit' : 'New' }} {{ config("laravel-blog.taxonomy", "Blog") }} Post</h3>
             <hr />
+
+            @include("laravel-blog::actions")
+
+            @include("laravel-blog::posts.form")
         </div>
-
-        @include("laravel-blog::actions")
-
-        @include("laravel-blog::posts.form")
 
     </div> <!-- End .row -->
 

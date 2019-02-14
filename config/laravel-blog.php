@@ -19,6 +19,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Auth
+    |--------------------------------------------------------------------------
+    |
+    | By default, backend routes will be hidden behind the auth middleware. Use
+    | this setting to change that
+    |
+    */
+
+    'use_auth_middleware' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Previewing Posts
+    |--------------------------------------------------------------------------
+    |
+    | Decides whether or not to show the preview post button on the admin side
+    |
+    */
+
+    'allow_post_previewing' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | View Path
     |--------------------------------------------------------------------------
     |
@@ -137,7 +160,7 @@ return [
              * Route for the custom file browser. Relative to your 'route_prefix' defined
              * above
              */
-            'file_browser_url'  => 'images?embed=true',
+            'file_browser_url'  => 'images?laravel-blog-embed=true',
 
             'image_upload_url'  => 'images/dialog-upload',
 
@@ -256,6 +279,45 @@ return [
          */
         'max_upload_size'   => 10000
 
-    ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comment Admin Options
+    |--------------------------------------------------------------------------
+    |
+    | All config options related to the blog comments.
+    |
+    */
+
+    'comments' => [
+
+        /*
+         * Defines whether or not the feature is enabled on the site or not.
+         */
+        'enabled'           => true,
+
+        /*
+         * The taxonomy will be used in the routes file to define the route.
+         */
+        'taxonomy'          => 'comments',
+
+        /*
+         * How many records should be shown on the index page.
+         */
+        'per_page'          => 15,
+
+        /*
+         * Defines if comments require approval before being displayed on the frontend version of a blog post.
+         */
+        'requires_approval' => true,
+
+        /*
+         * Defines whether non-authenticated users (guests) are allowed to comment on blog posts. They will be
+         * asked for a name and email to post a comment.
+         */
+        'allow_guests' => true,
+
+    ],
 
 ];

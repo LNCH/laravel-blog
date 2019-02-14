@@ -10,6 +10,15 @@ use Lnch\LaravelBlog\Requests\BlogPostRequest;
 
 class BlogPostController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (config("laravel-blog.use_auth_middleware", false)) {
+            $this->middleware("auth");
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -138,7 +147,13 @@ class BlogPostController extends Controller
      */
     public function show(BlogPost $post)
     {
-        //
+        if(auth()->user()->cannot("view", $post)) {
+            abort(403);
+        }
+
+        return view($this->viewPath."posts.show", [
+            'post' => $post
+        ]);
     }
 
     /**

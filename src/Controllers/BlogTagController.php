@@ -11,6 +11,10 @@ class BlogTagController extends Controller
     {
         parent::__construct();
 
+        if (config("laravel-blog.use_auth_middleware", false)) {
+            $this->middleware("auth");
+        }
+
         if (!config("laravel-blog.tags.enabled")) {
             abort(404);
         }

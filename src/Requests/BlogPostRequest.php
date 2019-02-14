@@ -26,15 +26,17 @@ class BlogPostRequest extends FormRequest
     {
         $rules = [];
 
-        array_merge($rules, [
-            'title'             => 'required|string',
-            'blog_image_id'     => 'sometimes|integer',
-            'content'           => 'required',
-            'status'            => 'required|in:'.implode(",", BlogPost::statuses()),
+        $statuses = implode(",", array_keys(BlogPost::statuses()));
+
+        $rules = array_merge($rules, [
+            'title'             => 'required|string|max:190',
+            'blog_image_id'     => 'nullable|integer',
+            'post_content'      => 'required|max:4294967295',
+            'status'            => 'required|in:'.$statuses,
             'format'            => 'sometimes',
-            'published_at'      => 'sometimes|date',
+            'published_at'      => 'nullable|date',
             'comments_enabled'  => 'required|boolean',
-            'tags'              => 'sometimes|string',
+            'tags'              => 'sometimes|string|nullable',
             'is_featured'       => 'sometimes|boolean',
         ]);
 
