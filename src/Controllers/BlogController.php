@@ -41,6 +41,13 @@ class BlogController extends Controller
             }
         }
 
+        // Check if comments are enabled, and if a reply ID has been specified
+        if(config("laravel-blog.comments.enabled") && request()->get("reply")) {
+            $replyTo = $post->comments()->find(request()->get("reply"));
+        } else {
+            $replyTo = null;
+        }
+
         // Check for correct slug, 301 if not
         if($post->slug !== $slug) {
             return redirect(config("laravel-blog.frontend_route_prefix")."/"
@@ -48,7 +55,8 @@ class BlogController extends Controller
         }
 
         return view($this->viewPath."frontend.show", [
-            'post' => $post
+            'post' => $post,
+            'replyTo' => $replyTo,
         ]);
     }
 
