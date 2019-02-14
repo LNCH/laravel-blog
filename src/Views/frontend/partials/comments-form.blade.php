@@ -13,6 +13,8 @@
         <form action="{{ blogUrl("$post->id/comments", true) }}" method="post">
             {{ csrf_field() }} {{ method_field("POST") }}
 
+            <input type="hidden" name="parent_id" value="{{ $replyTo ? $replyTo->id : null }}" />
+
             @if(!Auth::check())
                 <div class="row">
                     <div class="col-md-4">

@@ -66,11 +66,13 @@ class BlogController extends Controller
             'name' => 'sometimes|string|max:200',
             'email' => 'sometimes|email|max:150',
             'comment' => 'required|string|max:65000',
+            'parent_id' => 'sometimes|integer|in:'.implode(",", $post->comments()->pluck("id")->toArray()),
         ]);
 
         $post->comments()->create([
             'name' => $request->name,
             'email' => $request->email,
+            'parent_id' => $request->parent_id,
             'user_id' => auth()->id(),
             'body' => $request->comment,
             'status' => config("laravel-blog.comments.requires_approval")
