@@ -66,7 +66,7 @@ class BlogController extends Controller
             'name' => 'sometimes|string|max:200',
             'email' => 'sometimes|email|max:150',
             'comment' => 'required|string|max:65000',
-            'parent_id' => 'sometimes|integer|in:'.implode(",", $post->comments()->pluck("id")->toArray()),
+            'parent_id' => 'sometimes',
         ]);
 
         $post->comments()->create([

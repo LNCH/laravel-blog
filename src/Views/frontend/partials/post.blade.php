@@ -17,6 +17,9 @@
 
             <div class="post-meta">
                 Posted on {{ $post->published_at->format("jS F, Y") }} at {{ $post->published_at->format("H:i") }}
+                @if (config("laravel-blog.comments.enabled") && $post->commentsCount)
+                    - {{ $post->commentsCount }} comments
+                @endif
             </div>
         </header>
 

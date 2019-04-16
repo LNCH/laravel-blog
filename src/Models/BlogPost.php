@@ -86,12 +86,23 @@ class BlogPost extends BlogModel
      *
      * @return array|\Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comments()
+    public function allComments()
     {
         return config("laravel-blog.comments.enabled")
             ? $this->hasMany(Comment::class, "post_id", "id")
-                ->where("parent_id", null)
                 ->orderby("created_at", "desc")
+            : [];
+    }
+
+    /**
+     * Retrieves all top level comments, without replies
+     *
+     * @return array|\Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return config("laravel-blog.comments.enabled")
+            ? $this->allComments()->where("parent_id", null)
             : [];
     }
 
@@ -247,6 +258,16 @@ class BlogPost extends BlogModel
     public function getAuthorUrlAttribute()
     {
         return url("blog/author/{$this->author->id}-" . strtolower(str_replace(" ", "-", $this->author->name)));
+    }
+
+    /**
+     * Returns the amount of comments made on this blog post
+     *
+     * @return int
+     */
+    public function getCommentsCountAttribute()
+    {
+        return count($this->allComments);
     }
 
     public function isWithinDays($days = 7)
